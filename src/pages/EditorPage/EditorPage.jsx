@@ -19,6 +19,7 @@ import Select from '../../components/atoms/Select'
 import InputBordered from '../../components/atoms/InputBordered'
 import Button from '../../components/atoms/Button'
 import BlurLoader from '../../components/atoms/BlurLoader'
+import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 
 const EditorPage = () => {
 
@@ -158,6 +159,9 @@ const EditorPage = () => {
                 <p>
                     The headline should be no more than 30 characters. Description should be between 30 and 256 characters. Upload pictures less than 10 MB for the cover of the publication
                 </p>
+                <div className='panel'>
+                    <Breadcrumbs />
+                </div>
                 <span className={`${styles['editor__top-line']}`}></span>
             </div>
             <form ref={formRef} className={`${styles['editor__body']}`}>

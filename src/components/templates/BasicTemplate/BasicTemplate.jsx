@@ -12,7 +12,9 @@ const BasicTemplate = ({ header, leftSidebar, rightSidebar, children }) => {
                 <div className={`${styles['basic__left-sidebar']}`}>
                     {leftSidebar}
                 </div>
-                {children}
+                <div className={`${styles['basic__children']}`}>
+                    {children}
+                </div>
                 {rightSidebar}
             </div>
         </div>

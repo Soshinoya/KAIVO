@@ -27,7 +27,7 @@ const RightSidebar = ({ tagsData, setTagsData }) => {
         } else {
             setSubscriptionsUsersData([])
         }
-        DataSource.getPopularUsers(10).then(setRecommendedUsersData)
+        DataSource.getPopularUsers(3).then(setRecommendedUsersData)
         DataSource.getPopularPosts(3)
             .then(setPopularPostsData)
             .catch(error => console.log(error.message))

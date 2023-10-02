@@ -48,7 +48,7 @@ const PostPreviewLarge = ({ id, category, content, date, user, providedActions =
             const postContentHeight = postContentElement.getBoundingClientRect().height
 
             if (postContentHeight > 600) {
-                postContentElement.style.height = '600px'
+                postContentElement.style.maxHeight = '600px'
                 setIsReadMore(true)
             }
         })

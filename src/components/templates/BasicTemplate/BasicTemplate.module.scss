@@ -37,7 +37,7 @@
 @media (max-width: 720px) {
     .basic {
         &__inner {
-            grid-template-columns: 1fr;
+            grid-template-columns: unset;
         }
     }
 }
@@ -45,5 +45,13 @@
 @media (max-width: 720px) {
     .basic {
         padding: 0 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .basic {
+        &__children {
+            width: 90vw;
+        }
     }
 }

@@ -12,7 +12,7 @@ import { getRandomUUID } from '../../utils/getRandomUUID'
 import { Crypto } from '../../context/CryptoContext'
 
 import Loader from '../../components/atoms/Loader'
-import Breadcumbs from '../../components/atoms/Breadcrumbs'
+import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 import PostPreviewLarge from '../../components/organisms/PostPreviewLarge/PostPreviewLarge'
 import Select from '../../components/atoms/Select'
 import BlurLoader from '../../components/atoms/BlurLoader'
@@ -111,7 +111,7 @@ const UserPosts = () => {
         <div className={`${styles['wrapper']}`}>
             <BlurLoader isLoading={isBlurLoaderLoading} />
             <div className={`panel ${styles['breadcrumbs']}`}>
-                <Breadcumbs />
+                <Breadcrumbs />
             </div>
             <Select {...selectConfig} />
             {postsData.length > 0 && postsData.map(post => <PostPreviewLarge {...post} providedActions={actions} buttonConfig={btnConfig} key={post.id} />)}

@@ -57,7 +57,7 @@ body,
     }
 
     img {
-        // @include mixins.image-default();
+        @include mixins.image-default();
         border-radius: 10px;
         // aspect-ratio: 63 / 40;
     }
