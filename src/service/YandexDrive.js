@@ -5,6 +5,8 @@ const config = {
     host: 'https://cloud-api.yandex.net/v1/disk/resources',
 }
 
+const mode = {}
+
 export default class YandexDrive {
 
     static uploadFile = async (file, path) => {
@@ -18,7 +20,8 @@ export default class YandexDrive {
                     Authorization: `OAuth ${OAuthToken}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                }
+                },
+                mode: 'no-cors'
             })
 
             const urlForUpload = await response.json()
@@ -54,7 +57,8 @@ export default class YandexDrive {
                     Authorization: `OAuth ${OAuthToken}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                mode: 'no-cors'
             })
         } catch (error) {
             console.log(defineError(error.error || error.message))
@@ -72,7 +76,8 @@ export default class YandexDrive {
                     Authorization: `OAuth ${OAuthToken}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                }
+                },
+                mode: 'no-cors'
             })
 
             const linkToGetDownloadLink = await response.json()
@@ -86,3 +91,5 @@ export default class YandexDrive {
     }
 
 }
+
+// changed
