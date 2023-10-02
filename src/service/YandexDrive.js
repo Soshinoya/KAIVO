@@ -20,8 +20,7 @@ export default class YandexDrive {
                     Authorization: `OAuth ${OAuthToken}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
-                },
-                mode: 'no-cors'
+                }
             })
 
             const urlForUpload = await response.json()
@@ -57,8 +56,7 @@ export default class YandexDrive {
                     Authorization: `OAuth ${OAuthToken}`,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                },
-                mode: 'no-cors'
+                }
             })
         } catch (error) {
             console.log(defineError(error.error || error.message))
@@ -74,10 +72,9 @@ export default class YandexDrive {
                 method: 'GET',
                 headers: {
                     Authorization: `OAuth ${OAuthToken}`,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                mode: 'no-cors'
+                    // 'Accept': 'application/json',
+                    // 'Content-Type': 'application/json',
+                }
             })
 
             const linkToGetDownloadLink = await response.json()
@@ -91,5 +88,3 @@ export default class YandexDrive {
     }
 
 }
-
-// changed
