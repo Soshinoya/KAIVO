@@ -10,15 +10,17 @@ const UserPreviewLarge = ({ id, nickname = '', secondaryText = '', userImageSrc 
     const userProfileUrl = `/users/${id}`
 
     return (
-        <Link to={userProfileUrl}>
-            <div className={`panel ${styles['user-preview']}`}>
+        <div className={`panel ${styles['user-preview']}`}>
+            <Link to={userProfileUrl}>
                 <UserAvatar size='xl' src={userImageSrc} />
+            </Link>
+            <Link to={userProfileUrl}>
                 <div className={`${styles['user-preview__inner']}`}>
                     <h4>{nickname}</h4>
                     <p className='body-small'>{secondaryText}</p>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </div>
     )
 }
 

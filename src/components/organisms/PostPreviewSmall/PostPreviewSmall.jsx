@@ -5,6 +5,8 @@ import styles from './PostPreviewSmall.module.scss'
 
 import { getRandomUUID } from '../../../utils/getRandomUUID'
 
+import PostActions from '../../../service/PostActions'
+
 import PostPreviewHeader from '../../molecules/PostPreviewHeader/PostPreviewHeader'
 
 const PostPreviewSmall = ({ id, category, title, description, imageSrc, date, user, providedActions = [] }) => {
@@ -12,9 +14,7 @@ const PostPreviewSmall = ({ id, category, title, description, imageSrc, date, us
     const actions = providedActions.length > 0 ? providedActions : [
         {
             title: 'Complain',
-            action: () => {
-                console.log('Complaining on this post...')
-            },
+            action: () => PostActions.complainOnPost(id).catch(console.log),
             id: getRandomUUID()
         }
     ]

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { signOut } from 'firebase/auth'
 import { auth } from '../../../service/database/firebase'
 
@@ -17,9 +17,12 @@ const TopProfileLink = ({ userId, userTitle, userImageSrc, userProfileUrl, userI
 
     const [menu, setMenu] = useState(false)
 
+    const navigate = useNavigate()
+
     const onLogoutClickHandler = async () => {
         removeFromLS('userId')
         await signOut(auth)
+        navigate('/')
         window.location.reload()
     }
 

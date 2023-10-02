@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './ProfileHeader.module.scss'
 
@@ -11,6 +12,8 @@ import UserAvatar from '../../atoms/UserAvatar'
 import BlurLoader from '../../atoms/BlurLoader'
 
 const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImageSize = 'xl', coverImageSrc, actions, isMyProfile, btnText = 'Follow', btnSize = 'small', btnOnClick }) => {
+
+    const navigate = useNavigate()
 
     const coverInputRef = useRef(null)
 
@@ -52,6 +55,7 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
                             coverImageExtension: imageExtension,
                             coverImageSrc: 'custom'
                         })
+                        navigate('/')
                         window.location.reload()
                     })
                 break;
@@ -63,6 +67,7 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
                             userImageExtension: imageExtension,
                             userImageSrc: 'custom'
                         })
+                        navigate('/')
                         window.location.reload()
                     })
                 break;

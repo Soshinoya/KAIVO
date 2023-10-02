@@ -18,11 +18,11 @@ const BasicLayout = () => {
 
     const [tagsData, setTagsData] = useState([
         {
-            text: '#porsche 911',
+            text: '#design',
             id: getRandomUUID()
         },
         {
-            text: '#BMW',
+            text: '#brand',
             id: getRandomUUID()
         },
         {
@@ -30,7 +30,7 @@ const BasicLayout = () => {
             id: getRandomUUID()
         },
         {
-            text: '#livery',
+            text: '#assetto',
             id: getRandomUUID()
         },
         {
@@ -38,7 +38,7 @@ const BasicLayout = () => {
             id: getRandomUUID()
         },
         {
-            text: '#BMW',
+            text: '#music',
             id: getRandomUUID()
         },
         {
@@ -46,7 +46,7 @@ const BasicLayout = () => {
             id: getRandomUUID()
         },
         {
-            text: '#red',
+            text: '#wave',
             id: getRandomUUID()
         }
     ])

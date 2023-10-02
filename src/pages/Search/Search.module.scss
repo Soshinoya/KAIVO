@@ -10,8 +10,8 @@
 
 .search-media {
     &__users {
-        display: flex;
-        align-items: center;
+        display: grid;
+        grid-template-columns: repeat(4, 150px);
         gap: 20px;
     }
 

@@ -2,8 +2,10 @@ div .user-preview {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: space-between;
     gap: 10px;
     border-radius: 20px;
+    text-align: center;
 
     &__inner {
         display: flex;
