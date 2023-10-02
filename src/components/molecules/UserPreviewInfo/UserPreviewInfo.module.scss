@@ -1,0 +1,27 @@
+@use '../../../styles/base/variables.scss';
+
+.user-preview-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+
+        h4 {
+            cursor: pointer;
+            color: variables.$neutral-500;
+        }
+    }
+}
+
+@media (max-width: 460px) {
+    .user-preview-info img {
+        display: none;
+    }
+
+    .user-preview-info {
+        gap: 0;
+    }
+}

@@ -1,0 +1,32 @@
+@use '../../styles/base/variables.scss';
+
+.category {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        p {
+            color: variables.$neutral-600;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__top-line {
+        height: 1px;
+        width: 370px;
+        background-color: variables.$neutral-800;
+    }
+
+    &__posts {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

@@ -1,0 +1,24 @@
+$primary: #2563EB;
+$accent: #D946EF;
+$primary-300: #D3E6FE;
+$neutral-900: #1E293B;
+$neutral-800: #334155;
+$neutral-600: #94A3B8;
+$neutral-500: #CBD5E1;
+
+$transitionTimingFunc: cubic-bezier(0.165, 0.84, 0.44, 1);
+
+%raleway-700 {
+    font-family: 'Raleway';
+    font-weight: 700;
+}
+
+%raleway-500 {
+    font-family: 'Raleway';
+    font-weight: 500;
+}
+
+%lato-400 {
+    font-family: 'Lato';
+    font-weight: 400;
+}

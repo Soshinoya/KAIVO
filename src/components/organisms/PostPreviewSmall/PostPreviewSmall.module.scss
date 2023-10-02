@@ -1,0 +1,68 @@
+@use "../../../styles/base/variables.scss";
+@use "../../../styles/utils/mixins.scss";
+
+div .post-preview-small {
+    max-width: 672px;
+    width: 100%;
+    min-height: 210px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    flex-shrink: 0;
+    border-radius: 20px;
+
+    &__content {
+        display: grid;
+        grid-template-columns: 1fr 175px;
+        gap: 55px;
+    }
+
+    &__content-info {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h4 {
+            cursor: pointer;
+            color: variables.$neutral-500;
+        }
+    }
+
+    &__content-img {
+        width: 175px;
+        height: 100px;
+
+        img {
+            border-radius: 10px;
+            @include mixins.image-default();
+        }
+    }
+}
+
+.post-preview-small--without-img {
+    .post-preview-small__content-info {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    div .post-preview-small {
+        min-height: 190px;
+        gap: 15px;
+    }
+
+    div .post-preview-small__content {
+        display: block
+    }
+
+    div .post-preview-small__content-img {
+        display: none;
+    }
+}
+
+@media (max-width: 390px) {
+    .post-preview-small__content-info p {
+        display: none;
+    }
+}

@@ -1,0 +1,12 @@
+.users-block {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 20px;
+
+    &__inner {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+}

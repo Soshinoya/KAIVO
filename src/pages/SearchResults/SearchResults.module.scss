@@ -1,0 +1,30 @@
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.users {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    justify-content: center;
+    gap: 20px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+@media (max-width: 650px) {
+    .users {
+        grid-template-columns: repeat(3, max-content);
+    }
+}
+
+@media (max-width: 500px) {
+    .users {
+        grid-template-columns: repeat(2, max-content);
+    }
+}

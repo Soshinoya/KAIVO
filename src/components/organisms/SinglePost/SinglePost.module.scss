@@ -1,0 +1,13 @@
+@use "../../../styles/base/variables.scss";
+
+div.post {
+    max-width: 672px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid variables.$neutral-800;
+    background-blend-mode: overlay;
+}

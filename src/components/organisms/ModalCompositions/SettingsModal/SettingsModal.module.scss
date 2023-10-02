@@ -1,0 +1,74 @@
+@use '../../../../styles/base/variables.scss';
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__close {
+        cursor: pointer;
+    }
+
+    &__body-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}
+
+.account {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    &__input-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        label {
+            @extend %raleway-500;
+            font-size: 18px;
+
+            span {
+                @extend %lato-400;
+                color: variables.$neutral-600;
+            }
+        }
+    }
+
+    &__field-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__submit {
+        margin-left: auto;
+    }
+}

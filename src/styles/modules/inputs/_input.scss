@@ -1,0 +1,35 @@
+@use "../../base/variables";
+@use "../../utils/mixins";
+
+.input {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: variables.$neutral-500;
+
+    &__cross,
+    label {
+        cursor: pointer;
+    }
+
+    &__outer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    &__wrapper {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    @include mixins.not-disabled {
+        &:focus-visible {
+            outline: 0;
+        }
+    }
+}

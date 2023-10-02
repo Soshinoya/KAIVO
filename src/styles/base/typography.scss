@@ -1,0 +1,51 @@
+@use "./variables.scss";
+@use "sass:list";
+
+body {
+    background-color: #1e293b;
+
+    font-size: 18px;
+    @extend %lato-400;
+    color: $neutral-500;
+}
+
+.body-small {
+    color: $neutral-600;
+    letter-spacing: 0.14px;
+}
+
+$sizes: (("small", 14), ("medium", 16), ("large", 24));
+
+@each $size in $sizes {
+    .body-#{list.nth($size, 1)} {
+        font-size: #{list.nth($size, 2)}px;
+    }
+}
+
+h1 {
+    font-size: 40px;
+    @extend %raleway-700;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 24px;
+    font-variant: all-small-caps;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+h2,
+h3,
+h4 {
+    @extend %raleway-500;
+}
+
+a h4 {
+    color: variables.$neutral-500;
+}

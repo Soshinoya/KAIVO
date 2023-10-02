@@ -1,0 +1,34 @@
+@use "../../base/variables.scss";
+
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    &__link {
+        color: variables.$neutral-600;
+
+        &:not(:last-child) {
+            position: relative;
+            padding-right: 5px;
+
+            &::before {
+                content: "/";
+                position: absolute;
+                right: -10px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: variables.$neutral-600;
+            }
+        }
+
+        &:last-child {
+            color: variables.$neutral-500;
+            margin: 0;
+            -webkit-line-clamp: 1;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+}

@@ -1,0 +1,14 @@
+@use "../../../styles/base/variables.scss";
+
+div .user-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 30px 15px;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}

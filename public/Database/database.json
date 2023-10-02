@@ -1,0 +1,230 @@
+{
+    "users": [
+        {
+            "id": "2a91c89f-b11f-4a77-92f1-a99a6c74f97a",
+            "nickname": "Wade Warren",
+            "userImageSrc": "/Database/images/mazdarx.jpg",
+            "coverImageSrc": "/Database/images/covers/cover.jpg",
+            "secondaryText": "CEO",
+            "status": "Any mechanical keyboard enthusiasts in design?",
+            "accountInfo": {
+                "email": "nike95125@gmail.com",
+                "password": "",
+                "number": 18,
+                "country": "RUS"
+            },
+            "followers": [
+                "e0fc8afc-d789-4401-8e6e-899e06bae711",
+                "1339af17-e2a4-4a84-8d83-7eda8ea5a0d2",
+                "c65b30c8-52ee-4503-8ff1-e8f612bba6f7",
+                "d58b839c-5af2-494a-a8d3-776e75c94e39",
+                "6212623c-923d-4cd8-80d8-4ca1926a16e1"
+            ],
+            "likes": 21,
+            "posts": [
+                "6bb7b80e-7d0a-41dc-b14e-94d24b14d650",
+                "fe91a5a7-d9cf-4577-9675-e7b2097a974f"
+            ]
+        },
+        {
+            "id": "e0fc8afc-d789-4401-8e6e-899e06bae711",
+            "nickname": "Fontana Michela",
+            "userImageSrc": "/Database/images/porsche.jpg",
+            "coverImageSrc": "/Database/images/covers/1.svg",
+            "secondaryText": "Content Maker",
+            "status": "Any mechanical keyboard enthusiasts in design?",
+            "accountInfo": {
+                "email": "quatrabasujeu-4831@speed.1s.fr",
+                "password": "",
+                "number": 5,
+                "country": "RUS"
+            },
+            "followers": [
+                "2a91c89f-b11f-4a77-92f1-a99a6c74f97a",
+                "1339af17-e2a4-4a84-8d83-7eda8ea5a0d2"
+            ],
+            "likes": 70,
+            "posts": [
+                "822b9ffe-c94d-4165-a769-4e4d7d5a5e49"
+            ]
+        },
+        {
+            "id": "1339af17-e2a4-4a84-8d83-7eda8ea5a0d2",
+            "nickname": "Perri Isabella",
+            "userImageSrc": "/Database/images/huracan.jpg",
+            "coverImageSrc": "/Database/images/covers/2.svg",
+            "secondaryText": "Front-end Developer",
+            "status": "Any mechanical keyboard enthusiasts in design?",
+            "accountInfo": {
+                "email": "ceubudimmenoi-8072@ypmail.sehier.fr",
+                "password": "",
+                "number": 77,
+                "country": "RUS"
+            },
+            "followers": [
+                "e0fc8afc-d789-4401-8e6e-899e06bae711",
+                "c65b30c8-52ee-4503-8ff1-e8f612bba6f7"
+            ],
+            "likes": 10,
+            "posts": [
+                "133c7443-58f3-409e-97b4-80f7082bce01"
+            ]
+        },
+        {
+            "id": "c65b30c8-52ee-4503-8ff1-e8f612bba6f7",
+            "nickname": "Walters Roger",
+            "userImageSrc": "/Database/images/mustang.jpg",
+            "coverImageSrc": "/Database/images/covers/3.svg",
+            "secondaryText": "Neurosurgeon",
+            "status": "Any mechanical keyboard enthusiasts in design?",
+            "accountInfo": {
+                "email": "vouprossicroucru-6457@ypmail.sehier.fr",
+                "password": "",
+                "number": 8,
+                "country": "RUS"
+            },
+            "followers": [
+                "e0fc8afc-d789-4401-8e6e-899e06bae711",
+                "1339af17-e2a4-4a84-8d83-7eda8ea5a0d2"
+            ],
+            "likes": 5,
+            "posts": []
+        },
+        {
+            "id": "d58b839c-5af2-494a-a8d3-776e75c94e39",
+            "nickname": "Randall Margaret",
+            "userImageSrc": "/Database/images/pinksilvia.jpg",
+            "coverImageSrc": "/Database/images/covers/1.svg",
+            "secondaryText": "Brand designer",
+            "status": "Any mechanical keyboard enthusiasts in design?",
+            "accountInfo": {
+                "email": "vutrausaddossi-1478@ypmail.sehier.fr",
+                "password": "",
+                "number": 10,
+                "country": "RUS"
+            },
+            "followers": [
+                "e0fc8afc-d789-4401-8e6e-899e06bae711",
+                "1339af17-e2a4-4a84-8d83-7eda8ea5a0d2"
+            ],
+            "likes": 11,
+            "posts": [
+                "1878c726-8a27-48e5-bd09-b8eb000da04e"
+            ]
+        },
+        {
+            "id": "6212623c-923d-4cd8-80d8-4ca1926a16e1",
+            "nickname": "Hampton Eugene",
+            "userImageSrc": "/Database/images/trueno.jpg",
+            "coverImageSrc": "/Database/images/covers/2.svg",
+            "secondaryText": "HTML coder",
+            "status": "Any mechanical keyboard enthusiasts in design?",
+            "accountInfo": {
+                "email": "grusallevejoi-5715@yopmail.com",
+                "password": "",
+                "number": 18,
+                "country": "RUS"
+            },
+            "followers": [
+                "c65b30c8-52ee-4503-8ff1-e8f612bba6f7",
+                "d58b839c-5af2-494a-a8d3-776e75c94e39"
+            ],
+            "likes": 4,
+            "posts": [
+                "93babcff-0731-4c83-81e7-81f72c206238"
+            ]
+        }
+    ],
+    "posts": [
+        {
+            "id": "6bb7b80e-7d0a-41dc-b14e-94d24b14d650",
+            "category": "livery",
+            "title": "How to design your site footer like we did",
+            "description": "Put your knowledge of angles to work to track down the missing information in these shape puzzles.",
+            "imageSrc": "/Database/images/huracan.jpg",
+            "content": "<div>The importance of these issues is so evident that the scope and location of the training enables important tasks in developing mass participation systems. The task of the organisation, especially the new model of organisational performance, entails a process of introduction and modernisation of progressive development directions.<br /><br />Everyday practice shows that the implementation of the planned tasks is an interesting experiment in testing the participants` attitudes to the tasks. In this way, consultation with a broad-based constituency allows important tasks to be carried out in relation to the design of a development model. However, it should not be forgotten that the strengthening and development of the structure allows important tasks to be carried out with regard to the development of essential financial and administrative conditions.<img src='/Database/images/mazdarx.jpg' /><p>The importance of these issues is so evident that the scope and location of the training enables important tasks in developing mass participation systems. The task of the organisation, especially the new model of organisational performance, entails a process of introduction and modernisation of progressive development directions.</p></div>",
+            "date": {
+                "type": "time",
+                "value": 0
+            },
+            "user": {
+                "id": "2a91c89f-b11f-4a77-92f1-a99a6c74f97a"
+            }
+        },
+        {
+            "id": "fe91a5a7-d9cf-4577-9675-e7b2097a974f",
+            "category": "photo",
+            "title": "Post Title",
+            "description": "Post Description",
+            "imageSrc": "/Database/images/trueno.jpg",
+            "content": "<div>The importance of these issues is so evident that the scope and location of the training enables important tasks in developing mass participation systems. The task of the organisation, especially the new model of organisational performance, entails a process of introduction and modernisation of progressive development directions.<br /><br />Everyday practice shows that the implementation of the planned tasks is an interesting experiment in testing the participants` attitudes to the tasks. In this way, consultation with a broad-based constituency allows important tasks to be carried out in relation to the design of a development model. However, it should not be forgotten that the strengthening and development of the structure allows important tasks to be carried out with regard to the development of essential financial and administrative conditions.<img src='/Database/images/trueno.jpg' /><p>The importance of these issues is so evident that the scope and location of the training enables important tasks in developing mass participation systems. The task of the organisation, especially the new model of organisational performance, entails a process of introduction and modernisation of progressive development directions.</p></div>",
+            "date": {
+                "type": "time",
+                "value": 0
+            },
+            "user": {
+                "id": "2a91c89f-b11f-4a77-92f1-a99a6c74f97a"
+            }
+        },
+        {
+            "id": "1878c726-8a27-48e5-bd09-b8eb000da04e",
+            "category": "photo",
+            "title": "Looking for the right Porsche 911? How to choose what you really need",
+            "description": "Learn why designing an accessible website is crucial for reaching a wider audience",
+            "imageSrc": "/Database/images/porsche.jpg",
+            "content": "Website accessibility is not only important for individuals with disabilities but also for creating a user-friendly experience for all visitors. By designing an accessible website, you ensure that everyone, regardless of their abilities, can access and navigate your content.\n\nIn this post, we'll discuss the benefits of website accessibility, provide practical tips for making your website more inclusive, and highlight successful case studies of companies that have prioritized accessibility in their web design.\n\nJoin us as we dive into the world of website accessibility and discover how you can make your site welcoming to all users.",
+            "date": {
+                "type": "date",
+                "value": 0
+            },
+            "user": {
+                "id": "d58b839c-5af2-494a-a8d3-776e75c94e39"
+            }
+        },
+        {
+            "id": "133c7443-58f3-409e-97b4-80f7082bce01",
+            "category": "tuning",
+            "title": "10 tips for creating engaging social media content",
+            "description": "Learn how to captivate your audience with compelling social media posts",
+            "imageSrc": "/Database/images/mazdarx.jpg",
+            "content": "In today's digital age, it's crucial to create engaging social media content that stands out from the crowd. Here are 10 tips to help you captivate your audience:\n\n1. Know your target audience\n2. Use eye-catching visuals\n3. Craft compelling captions\n4. Incorporate trending hashtags\n5. Encourage user-generated content\n6. Run contests and giveaways\n7. Engage with your followers\n8. Post consistently\n9. Analyze and optimize your content\n10. Stay up-to-date with social media trends\n\nBy following these tips, you'll be able to create social media content that not only grabs attention but also drives engagement and boosts your online presence.",
+            "date": {
+                "type": "time",
+                "value": 0
+            },
+            "user": {
+                "id": "1339af17-e2a4-4a84-8d83-7eda8ea5a0d2"
+            }
+        },
+        {
+            "id": "822b9ffe-c94d-4165-a769-4e4d7d5a5e49",
+            "category": "blueprint",
+            "title": "The power of storytelling in marketing",
+            "description": "Discover how storytelling can elevate your brand and connect with your audience",
+            "imageSrc": "/Database/images/pinksilvia.jpg",
+            "content": "Storytelling has always been a powerful tool for communication, and it's no different in the world of marketing. By incorporating storytelling into your brand's messaging, you can create a deeper connection with your audience and leave a lasting impression.\n\nEffective storytelling in marketing should have a clear narrative structure, evoke emotions, and align with your brand's values. Whether it's through blog posts, social media campaigns, or video content, storytelling can help you stand out from competitors and build a loyal customer base.\n\nIn this post, we'll explore the different elements of storytelling in marketing and provide examples of successful campaigns that have leveraged the power of storytelling. Get ready to take your marketing efforts to the next level!",
+            "date": {
+                "type": "date",
+                "value": 0
+            },
+            "user": {
+                "id": "e0fc8afc-d789-4401-8e6e-899e06bae711"
+            }
+        },
+        {
+            "id": "93babcff-0731-4c83-81e7-81f72c206238",
+            "category": "photo",
+            "title": "The Impact of Social Media on Mental Health",
+            "description": "Understanding the potential effects of social media on our well-being",
+            "imageSrc": "/Database/images/huracan.jpg",
+            "content": "<html><body><h1>Social Media and Mental Health</h1><p>Social media has become an integral part of our lives, but it's important to understand its impact on our mental health. Here are some key points to consider:</p><img src='./Database/images/image3.jpg' alt='Social Media and Mental Health'><ul><li>Social media can contribute to feelings of loneliness and isolation, especially when comparing ourselves to others.</li><li>Excessive use of social media has been linked to increased anxiety and depression.</li><li>Cyberbullying and online harassment can have serious negative effects on mental well-being.</li><li>However, social media can also provide a sense of community and support for individuals going through similar experiences.</li><li>It's important to find a balance and use social media mindfully. Take breaks, limit screen time, and prioritize real-life connections.</li></ul></body></html>",
+            "date": {
+                "type": "date",
+                "value": 0
+            },
+            "user": {
+                "id": "6212623c-923d-4cd8-80d8-4ca1926a16e1"
+            }
+        }
+    ]
+}

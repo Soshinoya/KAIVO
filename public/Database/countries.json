@@ -1,0 +1,887 @@
+[
+    {
+        "label": "Afghanistan",
+        "value": "AFG",
+        "id": "e1391087-8e78-4793-a76a-c27183b96b55"
+    },
+    {
+        "label": "Angola",
+        "value": "AGO",
+        "id": "28cebbd9-97fd-4873-bd67-51397826f107"
+    },
+    {
+        "label": "Albania",
+        "value": "ALB",
+        "id": "167721ed-10b3-406d-af5f-144a2b63a188"
+    },
+    {
+        "label": "United Arab Emirates",
+        "value": "ARE",
+        "id": "8571bb84-4350-4234-8c1a-eea3f26e30d8"
+    },
+    {
+        "label": "Argentina",
+        "value": "ARG",
+        "id": "cd06ff85-2fde-4415-92fa-3cab137ce31a"
+    },
+    {
+        "label": "Armenia",
+        "value": "ARM",
+        "id": "dd0a534f-e739-4efb-9922-4e92b1abad8f"
+    },
+    {
+        "label": "Antarctica",
+        "value": "ATA",
+        "id": "c0385acf-52bf-4e0a-bef7-488524ecfed5"
+    },
+    {
+        "label": "French Southern and Antarctic Lands",
+        "value": "ATF",
+        "id": "f936b8cb-f93b-4296-ac37-6433ea9dfe87"
+    },
+    {
+        "label": "Australia",
+        "value": "AUS",
+        "id": "89683da1-dbc1-4227-af51-3d5405707527"
+    },
+    {
+        "label": "Austria",
+        "value": "AUT",
+        "id": "ef70c3af-7757-49a0-b549-8f9898167ebe"
+    },
+    {
+        "label": "Azerbaijan",
+        "value": "AZE",
+        "id": "403f639d-f6c0-4438-bdc9-fd7d29b2467b"
+    },
+    {
+        "label": "Burundi",
+        "value": "BDI",
+        "id": "bd202673-afb9-47da-a70f-1cea7ff18fa7"
+    },
+    {
+        "label": "Belgium",
+        "value": "BEL",
+        "id": "6be78a8e-62ee-416a-a4f7-a153f889b490"
+    },
+    {
+        "label": "Benin",
+        "value": "BEN",
+        "id": "cf09c067-aa22-4c8f-ae68-37b6a70ca0ce"
+    },
+    {
+        "label": "Burkina Faso",
+        "value": "BFA",
+        "id": "e9d3dfdd-d6dd-4696-9918-40e68f10cecf"
+    },
+    {
+        "label": "Bangladesh",
+        "value": "BGD",
+        "id": "b8ad81ac-b8d2-4c2c-a45e-83c96b46145a"
+    },
+    {
+        "label": "Bulgaria",
+        "value": "BGR",
+        "id": "3df407eb-9fae-46ba-8e4e-1c4bd3789f81"
+    },
+    {
+        "label": "The Bahamas",
+        "value": "BHS",
+        "id": "64acc137-b02f-47dc-a3b4-efd9ec25d8cc"
+    },
+    {
+        "label": "Bosnia and Herzegovina",
+        "value": "BIH",
+        "id": "66eb79ae-1fcf-4d25-9491-8d29253d2a67"
+    },
+    {
+        "label": "Belarus",
+        "value": "BLR",
+        "id": "0fdaa4ca-3f42-44cc-b10c-611bdea0e14b"
+    },
+    {
+        "label": "Belize",
+        "value": "BLZ",
+        "id": "c62c4300-fd7c-45a4-8e61-30f33da568b4"
+    },
+    {
+        "label": "Bolivia",
+        "value": "BOL",
+        "id": "4c34adcb-daf4-4f2c-8a47-7d50b8cc4678"
+    },
+    {
+        "label": "Brazil",
+        "value": "BRA",
+        "id": "440a714f-e7de-4417-aa2f-37c6c5d5fe81"
+    },
+    {
+        "label": "Brunei",
+        "value": "BRN",
+        "id": "8eb1ddd8-b7fd-42a1-a7e2-9f76700d612a"
+    },
+    {
+        "label": "Bhutan",
+        "value": "BTN",
+        "id": "ee433f04-f2d8-493b-b857-25a216389877"
+    },
+    {
+        "label": "Botswana",
+        "value": "BWA",
+        "id": "a763fcf8-296d-467a-9ab0-0157f8d84302"
+    },
+    {
+        "label": "Central African Republic",
+        "value": "CAF",
+        "id": "10a38745-5896-403b-bae9-b5891a379a42"
+    },
+    {
+        "label": "Canada",
+        "value": "CAN",
+        "id": "4cc548ce-f79d-4ea7-919b-1c148988790c"
+    },
+    {
+        "label": "Switzerland",
+        "value": "CHE",
+        "id": "7b45fd90-9bec-4f1a-a362-0dd369d4d19b"
+    },
+    {
+        "label": "Chile",
+        "value": "CHL",
+        "id": "db55ebc9-5887-41c8-b7bf-51c09e742337"
+    },
+    {
+        "label": "China",
+        "value": "CHN",
+        "id": "56b26444-0de4-4db9-871b-981b59672228"
+    },
+    {
+        "label": "Ivory Coast",
+        "value": "CIV",
+        "id": "39e203ef-9e35-46c4-8699-5e26ba904651"
+    },
+    {
+        "label": "Cameroon",
+        "value": "CMR",
+        "id": "4489bede-5ca0-4145-8aef-4d6053594c83"
+    },
+    {
+        "label": "Democratic Republic of the Congo",
+        "value": "COD",
+        "id": "daccb78d-badf-4abd-96ba-986765f1c183"
+    },
+    {
+        "label": "Republic of the Congo",
+        "value": "COG",
+        "id": "535db2ce-9a9a-4d7e-9ecd-8a39fe8a93da"
+    },
+    {
+        "label": "Colombia",
+        "value": "COL",
+        "id": "8b976911-303d-450f-83f5-486117d831a6"
+    },
+    {
+        "label": "Costa Rica",
+        "value": "CRI",
+        "id": "f27b24ce-0f27-41f2-ad04-2e88f9aa8c5b"
+    },
+    {
+        "label": "Cuba",
+        "value": "CUB",
+        "id": "0b305ccb-e44a-4871-94a7-fa4df50c404c"
+    },
+    {
+        "label": "Northern Cyprus",
+        "value": "-99",
+        "id": "824d4878-a458-4a72-b02e-e314581cc019"
+    },
+    {
+        "label": "Cyprus",
+        "value": "CYP",
+        "id": "eec82fc8-bd9d-4fc9-895e-6a907b2d2230"
+    },
+    {
+        "label": "Czech Republic",
+        "value": "CZE",
+        "id": "dbefe9dc-19ba-46b2-a9f8-d4b93599b154"
+    },
+    {
+        "label": "Germany",
+        "value": "DEU",
+        "id": "ab9d4606-a43b-4248-9658-bbebfa6e3339"
+    },
+    {
+        "label": "Djibouti",
+        "value": "DJI",
+        "id": "12f5d4f5-5620-43a3-b576-789886df3603"
+    },
+    {
+        "label": "Denmark",
+        "value": "DNK",
+        "id": "f5ac434e-4cff-4c1f-9376-b5d3805730de"
+    },
+    {
+        "label": "Dominican Republic",
+        "value": "DOM",
+        "id": "a33accef-8bcb-4910-8a05-1a28e7a76822"
+    },
+    {
+        "label": "Algeria",
+        "value": "DZA",
+        "id": "4f268e98-eabe-4832-ac11-35989c3be724"
+    },
+    {
+        "label": "Ecuador",
+        "value": "ECU",
+        "id": "bb0611cb-8ea6-4ce4-a25f-6910753411f4"
+    },
+    {
+        "label": "Egypt",
+        "value": "EGY",
+        "id": "b5d4ae86-e0f1-4f63-8294-9dad50d91d0f"
+    },
+    {
+        "label": "Eritrea",
+        "value": "ERI",
+        "id": "8c808daf-0c87-4fb3-94b1-91f7eb9d2ebb"
+    },
+    {
+        "label": "Spain",
+        "value": "ESP",
+        "id": "565275c4-981d-46db-b1df-c9f3d3070e0f"
+    },
+    {
+        "label": "Estonia",
+        "value": "EST",
+        "id": "08215ada-0579-42f7-b1ab-2b675211fc3e"
+    },
+    {
+        "label": "Ethiopia",
+        "value": "ETH",
+        "id": "24e9a32a-d667-45d3-b5cd-80bc2999e4ef"
+    },
+    {
+        "label": "Finland",
+        "value": "FIN",
+        "id": "b0b3f7ad-f43c-408c-9237-c95a940f743c"
+    },
+    {
+        "label": "Fiji",
+        "value": "FJI",
+        "id": "77cef0fa-5ef0-466a-bde4-c8a0eded065b"
+    },
+    {
+        "label": "Falkland Islands",
+        "value": "FLK",
+        "id": "4b79efb5-afa8-462a-9f28-7a45e3ad97d5"
+    },
+    {
+        "label": "France",
+        "value": "FRA",
+        "id": "79ae9807-3ef5-4a1d-9b09-d003402af36a"
+    },
+    {
+        "label": "Gabon",
+        "value": "GAB",
+        "id": "67c3ebee-3da2-4fd0-93e0-b0cbf9cebc7e"
+    },
+    {
+        "label": "United Kingdom",
+        "value": "GBR",
+        "id": "ce886d01-7241-45f5-8e9e-1c03d9dc10c2"
+    },
+    {
+        "label": "Georgia",
+        "value": "GEO",
+        "id": "06644d2c-0026-4c6c-bab7-079bb9cd86a8"
+    },
+    {
+        "label": "Ghana",
+        "value": "GHA",
+        "id": "a9b89be1-07ed-4f27-814b-0486fdc5fab5"
+    },
+    {
+        "label": "Guinea",
+        "value": "GIN",
+        "id": "d9e5c07f-586f-47ee-9d79-8c1b753dae4c"
+    },
+    {
+        "label": "Gambia",
+        "value": "GMB",
+        "id": "feb124a1-aaa7-4d58-b981-f66949f75f51"
+    },
+    {
+        "label": "Guinea Bissau",
+        "value": "GNB",
+        "id": "fcc30b20-30e3-4110-b440-33ac5d151f6a"
+    },
+    {
+        "label": "Equatorial Guinea",
+        "value": "GNQ",
+        "id": "83b42f2f-c1dc-4887-aae6-569e0f860b23"
+    },
+    {
+        "label": "Greece",
+        "value": "GRC",
+        "id": "1d3c42b7-1c07-417a-ad53-96773310590a"
+    },
+    {
+        "label": "Greenland",
+        "value": "GRL",
+        "id": "3dcb2e92-72eb-4445-8b20-142276530a2b"
+    },
+    {
+        "label": "Guatemala",
+        "value": "GTM",
+        "id": "410d74a5-db06-4dc9-a304-9997c7abfe47"
+    },
+    {
+        "label": "Guyana",
+        "value": "GUY",
+        "id": "9ba36110-446d-4794-86ee-cb656dc361e6"
+    },
+    {
+        "label": "Honduras",
+        "value": "HND",
+        "id": "757ce906-7987-4445-b93a-72f999446849"
+    },
+    {
+        "label": "Croatia",
+        "value": "HRV",
+        "id": "adf7e503-eacb-4ee4-85fe-f573e51b40cb"
+    },
+    {
+        "label": "Haiti",
+        "value": "HTI",
+        "id": "396e525d-0cb4-4562-a85f-c37eae4107aa"
+    },
+    {
+        "label": "Hungary",
+        "value": "HUN",
+        "id": "02d2ed07-79c7-41c3-adb5-5083e57a4364"
+    },
+    {
+        "label": "Indonesia",
+        "value": "IDN",
+        "id": "91178489-77ae-4816-a8a7-84c1c2ffc62e"
+    },
+    {
+        "label": "India",
+        "value": "IND",
+        "id": "25711ec8-e2ad-4650-ab35-1c8bca412218"
+    },
+    {
+        "label": "Ireland",
+        "value": "IRL",
+        "id": "e9b62a0f-86c0-4691-825a-c2e2d6237c9a"
+    },
+    {
+        "label": "Iran",
+        "value": "IRN",
+        "id": "3eacb845-9bd1-4489-b841-7f0edc578e02"
+    },
+    {
+        "label": "Iraq",
+        "value": "IRQ",
+        "id": "d0a5ac52-cacf-4587-8660-e9167f6b6726"
+    },
+    {
+        "label": "Iceland",
+        "value": "ISL",
+        "id": "ca5fca4f-cab2-41ba-9305-cd7413137213"
+    },
+    {
+        "label": "Israel",
+        "value": "ISR",
+        "id": "49efeceb-e9e0-4c10-a7be-c21510921822"
+    },
+    {
+        "label": "Italy",
+        "value": "ITA",
+        "id": "a36b5d71-d747-4a25-8f67-672966b36e8b"
+    },
+    {
+        "label": "Jamaica",
+        "value": "JAM",
+        "id": "cce9786c-ccd9-4dfb-aee5-b7f38191c6c3"
+    },
+    {
+        "label": "Jordan",
+        "value": "JOR",
+        "id": "abacaac5-faee-4d07-babb-e30213c11128"
+    },
+    {
+        "label": "Japan",
+        "value": "JPN",
+        "id": "e3badfd1-05af-4eff-994d-eb7933318679"
+    },
+    {
+        "label": "Kazakhstan",
+        "value": "KAZ",
+        "id": "d3bec049-9d4c-4ca9-97cf-2faf53c5a09e"
+    },
+    {
+        "label": "Kenya",
+        "value": "KEN",
+        "id": "65264461-879d-4b35-8804-85db1c19b030"
+    },
+    {
+        "label": "Kyrgyzstan",
+        "value": "KGZ",
+        "id": "93d87f03-4417-419d-a988-5bd733538de7"
+    },
+    {
+        "label": "Cambodia",
+        "value": "KHM",
+        "id": "7d348993-91a9-478a-bdd2-7a1e2ae6a7b8"
+    },
+    {
+        "label": "South Korea",
+        "value": "KOR",
+        "id": "4daf1451-2814-4beb-a3e5-ca84ef60b791"
+    },
+    {
+        "label": "Kosovo",
+        "value": "-99",
+        "id": "6bd14457-a174-460e-83af-bd9318b6a4fa"
+    },
+    {
+        "label": "Kuwait",
+        "value": "KWT",
+        "id": "20064415-282c-4f59-af6c-2a08086ae775"
+    },
+    {
+        "label": "Laos",
+        "value": "LAO",
+        "id": "bdbbe52c-0531-4d07-a055-c9f10477895f"
+    },
+    {
+        "label": "Lebanon",
+        "value": "LBN",
+        "id": "6ae25b7d-b4f6-4fe3-b7be-8969d77b3620"
+    },
+    {
+        "label": "Liberia",
+        "value": "LBR",
+        "id": "d4aa90bf-cdbd-4cc0-8022-62649422c6aa"
+    },
+    {
+        "label": "Libya",
+        "value": "LBY",
+        "id": "567b28b6-3323-4920-88e9-b64a76de9279"
+    },
+    {
+        "label": "Sri Lanka",
+        "value": "LKA",
+        "id": "383310f2-4933-4130-9a8d-c5f3d2ce8d75"
+    },
+    {
+        "label": "Lesotho",
+        "value": "LSO",
+        "id": "df707563-2bda-4143-a461-c2cda0537f54"
+    },
+    {
+        "label": "Lithuania",
+        "value": "LTU",
+        "id": "88fb0fbe-84dc-494a-921e-b44035554c98"
+    },
+    {
+        "label": "Luxembourg",
+        "value": "LUX",
+        "id": "bb19f5ea-a679-42ed-a200-36baf60a231d"
+    },
+    {
+        "label": "Latvia",
+        "value": "LVA",
+        "id": "d107bcf3-6587-451d-bf01-6238103d2ef7"
+    },
+    {
+        "label": "Morocco",
+        "value": "MAR",
+        "id": "8ec6af32-3c89-4e78-8566-de954e4370cb"
+    },
+    {
+        "label": "Moldova",
+        "value": "MDA",
+        "id": "676d504c-dc0e-428a-ab41-0c752a8ae26b"
+    },
+    {
+        "label": "Madagascar",
+        "value": "MDG",
+        "id": "d701185b-bc7b-4d82-82a7-938b6d017623"
+    },
+    {
+        "label": "Mexico",
+        "value": "MEX",
+        "id": "8165dc18-7cb2-49f8-941d-162e7ed5523b"
+    },
+    {
+        "label": "Macedonia",
+        "value": "MKD",
+        "id": "5268867a-a97c-4849-b8d3-edab679675a2"
+    },
+    {
+        "label": "Mali",
+        "value": "MLI",
+        "id": "4c470ca5-94dc-4fde-aefc-f31db58f6feb"
+    },
+    {
+        "label": "Myanmar",
+        "value": "MMR",
+        "id": "a0c1fd55-906a-4481-9b62-00f165aec170"
+    },
+    {
+        "label": "Montenegro",
+        "value": "MNE",
+        "id": "b2cce5e9-daca-47ae-9397-829e56b63d3c"
+    },
+    {
+        "label": "Mongolia",
+        "value": "MNG",
+        "id": "bb79b5f8-e02d-464f-974e-35a734e71175"
+    },
+    {
+        "label": "Mozambique",
+        "value": "MOZ",
+        "id": "59a3159d-dc35-4afb-b07c-8409bbaca85f"
+    },
+    {
+        "label": "Mauritania",
+        "value": "MRT",
+        "id": "52097347-8b62-4535-ac2a-5e9c00108639"
+    },
+    {
+        "label": "Malawi",
+        "value": "MWI",
+        "id": "aa2ece23-3930-4690-a0f4-95375612922b"
+    },
+    {
+        "label": "Malaysia",
+        "value": "MYS",
+        "id": "e3fc3476-311d-44da-860a-53e181cc1e66"
+    },
+    {
+        "label": "Namibia",
+        "value": "NAM",
+        "id": "eba12070-8964-41dc-bd7a-7d977ebc8ad5"
+    },
+    {
+        "label": "New Caledonia",
+        "value": "NCL",
+        "id": "078bd124-4ed2-472b-a5b2-0410030e3dba"
+    },
+    {
+        "label": "Niger",
+        "value": "NER",
+        "id": "cb47ae0b-74c5-4e7b-96b5-6f8de591954b"
+    },
+    {
+        "label": "Nigeria",
+        "value": "NGA",
+        "id": "960f3fef-83ce-4314-904e-4efc6ef07d18"
+    },
+    {
+        "label": "Nicaragua",
+        "value": "NIC",
+        "id": "688656ab-edba-4ac2-8fae-4675e255d677"
+    },
+    {
+        "label": "Netherlands",
+        "value": "NLD",
+        "id": "2d946547-8314-4398-b397-6ee402beb00d"
+    },
+    {
+        "label": "Norway",
+        "value": "NOR",
+        "id": "c7e09fd9-2c54-470c-b7ff-1efd6df8c32f"
+    },
+    {
+        "label": "Nepal",
+        "value": "NPL",
+        "id": "34d6b0a1-8ad5-4a78-9fda-9e25a1a965df"
+    },
+    {
+        "label": "New Zealand",
+        "value": "NZL",
+        "id": "e7330576-9a4d-4c1d-83a8-2e8c2f91c34c"
+    },
+    {
+        "label": "Oman",
+        "value": "OMN",
+        "id": "0bbbc7da-6992-4534-a9de-0fc43ac1abb5"
+    },
+    {
+        "label": "Pakistan",
+        "value": "PAK",
+        "id": "8dd47898-9fd9-415e-97f3-2dedf91e63dd"
+    },
+    {
+        "label": "Panama",
+        "value": "PAN",
+        "id": "fba3bf69-25ab-445d-a25e-7d147a3b0319"
+    },
+    {
+        "label": "Peru",
+        "value": "PER",
+        "id": "4285c14c-ec68-44dc-bcbe-3076b690bf30"
+    },
+    {
+        "label": "Philippines",
+        "value": "PHL",
+        "id": "de804120-8957-4f98-b6f2-141beb396286"
+    },
+    {
+        "label": "Papua New Guinea",
+        "value": "PNG",
+        "id": "d6642a8c-2dd6-4c9b-b6d7-ade10cff7d64"
+    },
+    {
+        "label": "Poland",
+        "value": "POL",
+        "id": "1a0ffda2-990b-43e9-82cd-d4284d620f99"
+    },
+    {
+        "label": "Puerto Rico",
+        "value": "PRI",
+        "id": "bf83f8ce-ce13-4132-bee2-729ca163d6ac"
+    },
+    {
+        "label": "North Korea",
+        "value": "PRK",
+        "id": "1d801542-805f-4efe-a655-86f3278214e8"
+    },
+    {
+        "label": "Portugal",
+        "value": "PRT",
+        "id": "a07ecf29-ca26-42bc-8216-b004c5239fa8"
+    },
+    {
+        "label": "Paraguay",
+        "value": "PRY",
+        "id": "0e834150-9977-46ad-b4f2-9d84f0dfc818"
+    },
+    {
+        "label": "Qatar",
+        "value": "QAT",
+        "id": "8787df2f-4411-47ab-aa99-aa3ad25b0257"
+    },
+    {
+        "label": "Romania",
+        "value": "ROU",
+        "id": "01b2901f-3a09-4b46-b033-e2a035c1ce69"
+    },
+    {
+        "label": "Russia",
+        "value": "RUS",
+        "id": "5eb01b50-f5d6-4cc9-8726-5119b7c58311"
+    },
+    {
+        "label": "Rwanda",
+        "value": "RWA",
+        "id": "6bd46a35-b335-42c9-a538-a26cce6edb6b"
+    },
+    {
+        "label": "Western Sahara",
+        "value": "-99",
+        "id": "76e6781f-d8e5-43f8-8ff9-e6b0f1e6a049"
+    },
+    {
+        "label": "Saudi Arabia",
+        "value": "SAU",
+        "id": "ec4cd339-fdb3-442a-b380-72afae86f284"
+    },
+    {
+        "label": "Sudan",
+        "value": "SDN",
+        "id": "d20a4388-4840-484a-a7b1-4e328db2a11d"
+    },
+    {
+        "label": "South Sudan",
+        "value": "SDS",
+        "id": "12b370eb-2311-406c-be94-f2b3157d823c"
+    },
+    {
+        "label": "Senegal",
+        "value": "SEN",
+        "id": "19d7ed60-4fde-4d84-80b3-1fececc851bc"
+    },
+    {
+        "label": "Solomon Islands",
+        "value": "SLB",
+        "id": "6aba85c1-0d08-4f58-89dc-95e378c0a3f5"
+    },
+    {
+        "label": "Sierra Leone",
+        "value": "SLE",
+        "id": "e51b02b7-1cd5-4d4f-87ad-5262f01bf59d"
+    },
+    {
+        "label": "El Salvador",
+        "value": "SLV",
+        "id": "63b8cc3a-d84c-4717-b900-d95f5f6f9935"
+    },
+    {
+        "label": "Somaliland",
+        "value": "-99",
+        "id": "9507a595-b121-46f8-92da-3167cfff0314"
+    },
+    {
+        "label": "Somalia",
+        "value": "SOM",
+        "id": "70bae718-1582-41a2-9a6e-4512609cd548"
+    },
+    {
+        "label": "Republic of Serbia",
+        "value": "SRB",
+        "id": "ff75ec40-2919-4e20-9f14-8c2db8ad7e72"
+    },
+    {
+        "label": "Suriname",
+        "value": "SUR",
+        "id": "b2901feb-fbde-41d3-8a27-a1c56818fac7"
+    },
+    {
+        "label": "Slovakia",
+        "value": "SVK",
+        "id": "38cd868a-4ba1-46d4-a1af-62df15365b20"
+    },
+    {
+        "label": "Slovenia",
+        "value": "SVN",
+        "id": "6a66b8db-2445-4087-a4d2-75dfcc91010c"
+    },
+    {
+        "label": "Sweden",
+        "value": "SWE",
+        "id": "2f0db253-b8df-49f6-b20c-ac94cbe90cc2"
+    },
+    {
+        "label": "Swaziland",
+        "value": "SWZ",
+        "id": "e14e3877-528a-48ab-85d1-7ed1a4133c04"
+    },
+    {
+        "label": "Syria",
+        "value": "SYR",
+        "id": "d792a9fb-f67d-432e-af73-8a7dde4ad57b"
+    },
+    {
+        "label": "Chad",
+        "value": "TCD",
+        "id": "8a9c185b-a2d2-4f5f-a70a-0f1c4d13f53e"
+    },
+    {
+        "label": "Togo",
+        "value": "TGO",
+        "id": "d95b61b2-17f7-4cfd-8c65-292621e5dce9"
+    },
+    {
+        "label": "Thailand",
+        "value": "THA",
+        "id": "bb2b9b60-0f48-4173-9412-377a177ae72c"
+    },
+    {
+        "label": "Tajikistan",
+        "value": "TJK",
+        "id": "9e4442f2-4632-44e0-8313-9d710f7176a3"
+    },
+    {
+        "label": "Turkmenistan",
+        "value": "TKM",
+        "id": "11ec5662-2e86-4c71-960b-54bdbb1b9cc2"
+    },
+    {
+        "label": "East Timor",
+        "value": "TLS",
+        "id": "fb42ea11-2e08-4a52-89f9-5c12f92e2d04"
+    },
+    {
+        "label": "Trinidad and Tobago",
+        "value": "TTO",
+        "id": "ea05732f-efcc-4737-a52f-07b951de4474"
+    },
+    {
+        "label": "Tunisia",
+        "value": "TUN",
+        "id": "a230a294-9526-45d2-99cb-5aecf4e20550"
+    },
+    {
+        "label": "Turkey",
+        "value": "TUR",
+        "id": "9da662c7-2643-4e36-9b9a-bfe3d8c40172"
+    },
+    {
+        "label": "Taiwan",
+        "value": "TWN",
+        "id": "68519fbf-2ffa-49af-a209-f44b2b8ac45b"
+    },
+    {
+        "label": "United Republic of Tanzania",
+        "value": "TZA",
+        "id": "502995e5-fce2-4d35-bd42-2a8ea5261314"
+    },
+    {
+        "label": "Uganda",
+        "value": "UGA",
+        "id": "d7562827-b3e5-4f44-8b63-292503b1d89c"
+    },
+    {
+        "label": "Ukraine",
+        "value": "UKR",
+        "id": "cbb29e53-38f3-4395-9870-e19d1ee5fa38"
+    },
+    {
+        "label": "Uruguay",
+        "value": "URY",
+        "id": "0bdc8717-7ef9-4455-8de4-243bc95bc065"
+    },
+    {
+        "label": "United States of America",
+        "value": "USA",
+        "id": "ed111724-aaed-4917-83ca-37f089b7b1f4"
+    },
+    {
+        "label": "Uzbekistan",
+        "value": "UZB",
+        "id": "de4131bf-6715-48fc-8cb6-c36e5d1f4b51"
+    },
+    {
+        "label": "Venezuela",
+        "value": "VEN",
+        "id": "ee1082b2-2b26-4168-a1a6-b38812a15271"
+    },
+    {
+        "label": "Vietnam",
+        "value": "VNM",
+        "id": "61e161df-689e-4c54-9ce9-9ba5bf9a9ad2"
+    },
+    {
+        "label": "Vanuatu",
+        "value": "VUT",
+        "id": "03f03092-80b8-4670-96b5-6edca765f29f"
+    },
+    {
+        "label": "West Bank",
+        "value": "PSE",
+        "id": "7d0cd3bb-3777-4c6b-8e6c-bd1dba377daa"
+    },
+    {
+        "label": "Yemen",
+        "value": "YEM",
+        "id": "746b1942-2c9c-4ff9-817b-34d928dadd67"
+    },
+    {
+        "label": "South Africa",
+        "value": "ZAF",
+        "id": "f0499653-2d3c-482e-b1af-ddf7590fbbb1"
+    },
+    {
+        "label": "Zambia",
+        "value": "ZMB",
+        "id": "0e781bba-0bfc-49db-bff5-4467a4586366"
+    },
+    {
+        "label": "Zimbabwe",
+        "value": "ZWE",
+        "id": "80924df4-a238-4588-b93e-89c59f5c73c5"
+    }
+]

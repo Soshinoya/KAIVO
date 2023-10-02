@@ -1,0 +1,79 @@
+@use "../../styles/base/variables.scss";
+
+.editor {
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        p {
+            color: variables.$neutral-600;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__top-line {
+        height: 1px;
+        width: 370px;
+        background-color: variables.$neutral-800;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+    }
+
+    &__body-field {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__body-fileInput {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+
+        &__wrapper {
+            position: relative;
+        }
+
+        &__inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__title {
+            max-width: 340px;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        &__span {
+            width: max-content;
+            margin-top: 10px;
+            color: variables.$neutral-600;
+        }
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 30px;
+}

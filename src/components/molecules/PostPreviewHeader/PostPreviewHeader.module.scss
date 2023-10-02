@@ -1,0 +1,11 @@
+.post-preview-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &--near {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+}

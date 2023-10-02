@@ -1,0 +1,91 @@
+@use "../../../styles/utils/mixins.scss";
+@use "../../../styles/base/variables.scss";
+
+div.wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    border-radius: 20px;
+}
+
+.cover {
+    height: 168px;
+    position: relative;
+    overflow: hidden;
+
+    .cover__image {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        filter: blur(0);
+        transition: filter 0.4s variables.$transitionTimingFunc;
+
+        @include mixins.image-default();
+    }
+
+    &__input {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+    }
+
+    &__input-label {
+        opacity: 0;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        transition: opacity 0.4s variables.$transitionTimingFunc;
+    }
+
+    &:hover {
+        .cover__input-label {
+            opacity: 1;
+        }
+
+        .cover__image {
+            filter: blur(5px);
+        }
+    }
+}
+
+.profile-info {
+    margin-top: -37px;
+    padding: 30px;
+    padding-top: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    &__inner {
+        display: flex;
+        align-items: flex-end;
+        gap: 20px;
+
+        img {
+            z-index: 0;
+        }
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 550px) {
+    .profile-info {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+
+        &__inner {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+}

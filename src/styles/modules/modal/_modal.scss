@@ -1,0 +1,62 @@
+@use '../../base/variables.scss';
+
+.vmodal.open .modal-overlay,
+.vmodal.open .modal-window {
+    opacity: 1;
+    z-index: 20;
+}
+
+.vmodal.hide .modal-overlay,
+.vmodal.hide .modal-window {
+    opacity: 1;
+    z-index: 20;
+}
+
+.vmodal.open .modal-window {
+    transform: translateY(5vh);
+}
+
+.vmodal.hide .modal-window {
+    transform: translateY(-100%);
+}
+
+.modal-window,
+.modal-overlay {
+    opacity: 0;
+    z-index: -1;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+div.modal-window {
+    min-height: 600px;
+    max-width: 672px;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 20px;
+    padding: 50px;
+    transform: translateY(-200px);
+    transition: transform .2s variables.$transitionTimingFunc;
+    background-color: variables.$neutral-900;
+}
+
+@media (max-width: 720px) {
+    div.modal-window {
+        max-width: unset;
+        width: auto;
+        margin: 0 20px;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    div.modal-overlay {
+        overflow: scroll;
+    }
+}

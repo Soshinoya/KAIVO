@@ -1,0 +1,19 @@
+@use '../../../styles/base/variables.scss';
+
+.post-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    h4 {
+        color: variables.$neutral-500;
+    }
+}

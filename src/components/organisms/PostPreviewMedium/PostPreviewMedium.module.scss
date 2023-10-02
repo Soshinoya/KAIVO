@@ -1,0 +1,39 @@
+@use "../../../styles/base/variables.scss";
+@use "../../../styles/utils/mixins.scss";
+
+.post-preview-medium {
+    max-width: 286px;
+    max-height: 364px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 10px;
+    border: 1px solid variables.$neutral-800;
+
+    &__img {
+        height: 186px;
+
+        img {
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            @include mixins.image-default();
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        padding-top: 0;
+    }
+
+    &__info-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

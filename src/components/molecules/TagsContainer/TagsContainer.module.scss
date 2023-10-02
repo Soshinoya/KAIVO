@@ -1,0 +1,13 @@
+.tags-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 15px;
+    gap: 20px;
+
+    &__inner {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+}

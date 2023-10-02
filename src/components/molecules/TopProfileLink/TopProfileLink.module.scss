@@ -1,0 +1,45 @@
+@use "../../../styles/base/variables.scss";
+
+div .top-profile-link {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    &__menu {
+        width: fit-content;
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        background-color: variables.$neutral-900;
+        user-select: none;
+        z-index: 1;
+
+    }
+    
+    .direction-down {
+        top: 60px;
+        right: 0;
+    }
+
+    .direction-top {
+        bottom: 60px;
+        right: 0;
+    }
+
+    &__menu-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: variables.$neutral-500;
+    }
+}

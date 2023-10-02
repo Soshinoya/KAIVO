@@ -1,0 +1,59 @@
+@use '../../../styles/base/variables';
+@use '../../../styles/utils/mixins';
+
+div .link-bar {
+    border: 2px solid variables.$neutral-800;
+    user-select: none;
+    min-width: 145px;
+    min-height: 145px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 15px;
+    cursor: pointer;
+
+    svg path {
+        stroke-width: 2px;
+    }
+
+    &,
+    h4,
+    p,
+    div,
+    svg path {
+        transition: all .2s ease-in-out;
+    }
+
+    @include mixins.hover() {
+        border-color: variables.$primary;
+
+        h4,
+        p {
+            color: variables.$primary;
+        }
+
+        svg path {
+            stroke: variables.$primary;
+        }
+    }
+}
+
+.link-bar-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+@media (max-width: 395px) {
+    div .link-bar {
+        min-width: unset;
+        min-height: unset;
+        width: 30vw;
+        height: 100px;
+
+        p {
+            display: none;
+        }
+    }
+}

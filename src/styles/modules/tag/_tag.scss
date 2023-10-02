@@ -1,0 +1,13 @@
+@use '../../base/variables';
+
+.tag {
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: variables.$neutral-800;
+    cursor: pointer;
+
+    &__title {
+        color: variables.$neutral-500;
+    }
+}

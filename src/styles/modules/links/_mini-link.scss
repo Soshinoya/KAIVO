@@ -1,0 +1,6 @@
+@use './../../base/variables';
+
+.mini-link {
+    color: variables.$accent;
+    cursor: pointer;
+}

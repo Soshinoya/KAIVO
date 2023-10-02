@@ -1,0 +1,36 @@
+@use "../../../styles/base/variables.scss";
+
+div .results-block {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 30px;
+    border-radius: 20px;
+    border: 1px solid variables.$neutral-800;
+    background-color: variables.$neutral-900;
+
+    a {
+        color: variables.$neutral-500;
+    }
+
+    &__single {
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+
+        &:not(:first-child)::before {
+            content: "";
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            top: -15px;
+            background-color: variables.$neutral-800;
+        }
+    }
+
+    &::after {
+        z-index: 0;
+    }
+}

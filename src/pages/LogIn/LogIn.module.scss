@@ -1,0 +1,28 @@
+div.wrapper {
+    max-width: 560px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 50px;
+    border-radius: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &__submit {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__submit-inner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+}

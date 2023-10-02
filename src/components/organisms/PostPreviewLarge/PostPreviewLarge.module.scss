@@ -1,0 +1,61 @@
+@use "../../../styles/utils/mixins.scss";
+@use "../../../styles/base/variables.scss";
+
+div .post-preview-large {
+    max-width: 672px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 20px;
+
+    &__footer {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__footer--near {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    &__footer-btn svg path {
+        stroke: variables.$neutral-500;
+        transition: stroke 0.2s ease-in-out;
+    }
+
+    &__footer-btn {
+        cursor: pointer;
+
+        &--filled {
+            svg path {
+                stroke: variables.$accent;
+                fill: variables.$accent;
+            }
+        }
+
+        @include mixins.hover() {
+            svg path {
+                stroke: variables.$accent;
+            }
+        }
+    }
+
+    &__content {
+        overflow: hidden;
+        margin-bottom: 10px;
+    }
+
+    span {
+        color: variables.$accent;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 460px) {
+    .post-preview-large__img-wrapper {
+        display: none;
+    }
+}

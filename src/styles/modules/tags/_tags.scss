@@ -1,0 +1,10 @@
+.tags {
+    &__list {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        align-self: stretch;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}

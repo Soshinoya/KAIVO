@@ -1,0 +1,35 @@
+{
+  "name": "Kaivo",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "firebase": "^10.3.1",
+    "query-string": "^8.1.0",
+    "quill-delta-to-html": "^0.12.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-quill": "^2.0.0",
+    "react-router-dom": "^6.4.1",
+    "react-scripts": "5.0.1",
+    "sass": "^1.57.1",
+    "uuid": "^9.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

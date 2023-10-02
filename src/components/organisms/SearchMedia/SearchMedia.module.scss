@@ -1,0 +1,16 @@
+.search-media {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__divider {
+        max-width: 370px;
+        margin: 0 auto;
+    }
+}

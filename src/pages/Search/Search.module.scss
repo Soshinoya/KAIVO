@@ -1,0 +1,23 @@
+.search {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    &__nothing {
+        margin: 0 auto;
+    }
+}
+
+.search-media {
+    &__users {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__posts {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

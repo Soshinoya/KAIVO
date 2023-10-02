@@ -1,0 +1,28 @@
+@use '../../base/variables';
+@use '../../utils/mixins';
+
+.button-wide-invert {
+    width: 100%;
+    border: 1px solid variables.$primary;
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    
+    @include mixins.button-size(null, 15px 60px);
+    
+    @include mixins.disabled {
+        p {
+            color: #fff;
+        }
+        background-color: #ccc;
+        cursor: default;
+    }
+    
+    @include mixins.outline-on-focus;
+    
+    p {
+        color: variables.$primary;
+    }
+
+    @include mixins.buttonHover(variables.$neutral-900)
+}
