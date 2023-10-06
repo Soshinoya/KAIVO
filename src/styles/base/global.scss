@@ -101,6 +101,62 @@ body,
     background-color: variables.$neutral-800;
 }
 
+.animation-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    z-index: -1;
+    filter: blur(20px);
+}
+
+.animation-bubbles {
+    position: relative;
+    display: flex;
+}
+
+.animation-bubbles span {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background: variables.$primary;
+    margin: 0 4px;
+    box-shadow:
+        0 0 0 10px #{variables.$primary}44,
+        0 0 50px variables.$primary,
+        0 0 100px variables.$primary;
+    border-radius: 50%;
+    animation: animate 15s linear infinite;
+    animation-duration: calc(700s / var(--i));
+}
+
+.animation-bubbles span:nth-child(even) {
+    background: variables.$accent;
+    box-shadow:
+        0 0 0 10px #{variables.$accent}44,
+        0 0 50px variables.$accent,
+        0 0 100px variables.$accent;
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(120vh) scale(.5);
+    }
+
+    100% {
+        transform: translateY(-20vh) scale(.5);
+    }
+}
+
+@media (max-width: 720px) {
+    .animation-container {
+        filter: blur(10px);
+    }
+}
+
 @media (max-width: 460px) {
     .post-content {
         font-size: 14px;

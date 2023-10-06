@@ -8,6 +8,7 @@ import AccountActions from '../../../../service/AccountActions'
 import { validateByName } from '../../../../utils/validateByName'
 
 import { Crypto } from '../../../../context/CryptoContext'
+import { BackgroundAnimate } from '../../../../context/AnimateContext'
 
 import useCustomModal from '../../../../hooks/useCustomModal/useCustomModal'
 
@@ -20,6 +21,7 @@ import MixerIcon from '../../../atoms/icons/MixerIcon'
 import InputBordered from '../../../atoms/InputBordered'
 import Button from '../../../atoms/Button'
 import Select from '../../../atoms/Select'
+import Toggle from '../../../atoms/Toggle'
 
 const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0, country = '', status = '', secondaryText = '' }) => {
 
@@ -27,11 +29,15 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
 
     const { user, setUser } = useContext(Crypto)
 
+    const { isEnabled: isEnabledBGAnimateContext, setIsEnabled: setIsEnabledBGAnimateContext } = useContext(BackgroundAnimate)
+
     const [content, setContent] = useState()
 
     const [countries, setCountries] = useState([])
 
     const [countryCurrentValue, setCountryCurrentValue] = useState(country)
+
+    const [isBackgroundAnimationEnabled, setIsBackgroundAnimationEnabled] = useState(isEnabledBGAnimateContext)
 
     useEffect(() => {
         setCountryCurrentValue(country)
@@ -44,6 +50,8 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
     const [errors, setErrors] = useState([])
 
     const accountForm = useRef(null)
+
+    const settingsForm = useRef(null)
 
     const onAccountFormSubmit = async e => {
         e.preventDefault()
@@ -86,6 +94,25 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
                 }
             })
         }
+    }
+
+    const onInterfaceSettingsFormSubmit = async e => {
+        e.preventDefault()
+        const formData = new FormData(settingsForm.current)
+        await AccountActions.updateAccountProperties(user?.id, {
+            interfaceSettings: {
+                isBackgroundAnimationEnabled: Boolean(formData.get('background-animation-toggle')) || false
+            }
+        })
+        setUser(prevUser => {
+            return {
+                ...prevUser,
+                interfaceSettings: {
+                    isBackgroundAnimationEnabled: Boolean(formData.get('background-animation-toggle')) || false
+                }
+            }
+        })
+        setIsEnabledBGAnimateContext(Boolean(formData.get('background-animation-toggle')) || false)
     }
 
     const countrySelectConfig = {
@@ -171,6 +198,17 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
                             <span className={`${styles['modal__close']}`} onClick={() => setNavigate('/')}>
                                 <StepBackIcon style={{ width: '15.86px', height: '10.982px' }} />
                             </span>
+                        </div>
+                        <div className={`${styles['account__wrapper']}`}>
+                            <form ref={settingsForm} className={`${styles['account']}`}>
+                                <div className={`${styles['account__field-inner']}`}>
+                                    <h4>Enable background animation</h4>
+                                    <Toggle name='background-animation-toggle' checked={isEnabledBGAnimateContext} setChecked={setIsEnabledBGAnimateContext} />
+                                </div>
+                            </form>
+                            <div className={`${styles['account__submit']}`}>
+                                <Button type='submit' text='Save' size='large' onClick={onInterfaceSettingsFormSubmit} />
+                            </div>
                         </div>
                     </>
                 )

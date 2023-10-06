@@ -423,6 +423,9 @@ export default class DataSource {
                 number: 0,
                 country: 'RUS'
             },
+            interfaceSettings: {
+                isBackgroundAnimationEnabled: false
+            },
             followers: [],
             likes: 0,
             posts: [],

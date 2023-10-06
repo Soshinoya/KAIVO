@@ -56,6 +56,13 @@ const Profile = () => {
 
     const [fetching, setFetching] = useState(true)
 
+    useEffect(() => {
+        setUserData()
+        setFetching(true)
+        setPostsData([])
+        setLastDocIndex(0)
+    }, [userId])
+
     // Устанавливаем значение isFollower
     useEffect(() => {
         if (!user) return
@@ -102,12 +109,6 @@ const Profile = () => {
             })
             .catch(console.error)
     }, [userData])
-
-    useEffect(() => {
-        setFetching(true)
-        setPostsData([])
-        setLastDocIndex(0)
-    }, [userId])
 
     // fetch posts
     useEffect(() => {

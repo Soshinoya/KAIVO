@@ -1,8 +1,10 @@
 import { createContext, useEffect, useState } from 'react'
 
-import { getFromLS } from '../utils/localStorageActions'
+import { getFromLS, removeFromLS } from '../utils/localStorageActions'
 
 import DataSource from '../service/DataSource'
+
+import { auth } from '../service/database/firebase'
 
 const Crypto = createContext()
 
@@ -15,7 +17,12 @@ const CryptoContext = ({ children }) => {
     useEffect(() => {
         const userId = getFromLS('userId')
         if (userId) {
-            DataSource.getUserById(userId).then(setUser)
+            if (auth.currentUser) {
+                DataSource.getUserById(userId).then(setUser)
+            } else {
+                removeFromLS('userId')
+                console.log('Please log in')
+            }
         }
     }, [])
 

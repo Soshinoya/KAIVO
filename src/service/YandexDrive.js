@@ -2,6 +2,7 @@ import { defineError } from '../utils/defineError'
 
 const config = {
     clientId: 'c511a42eba8d440486897ffd586fde04',
+    // host: 'https://cloud-api',
     host: 'https://cloud-api.yandex.net/v1/disk/resources',
 }
 
