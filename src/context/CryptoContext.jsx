@@ -1,7 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
 
-import { getFromLS, removeFromLS } from '../utils/localStorageActions'
-
 import DataSource from '../service/DataSource'
 
 import { auth } from '../service/database/firebase'
@@ -15,15 +13,30 @@ const CryptoContext = ({ children }) => {
     const [userPrivateInfo, setUserPrivateInfo] = useState(null)
 
     useEffect(() => {
-        const userId = getFromLS('userId')
-        if (userId) {
-            if (auth.currentUser) {
-                DataSource.getUserById(userId).then(setUser)
-            } else {
-                removeFromLS('userId')
-                console.log('Please log in')
+        const fetching = async () => {
+            try {
+                const user = auth.currentUser
+
+                if (user) {
+                    // Если пользователь уже аутентифицирован, вы можете получить данные пользователя
+                    const userData = await DataSource.getUserById(user.uid)
+                    setUser(userData)
+                } else {
+                    // Если пользователь ещё не аутентифицирован, дождитесь аутентификации с помощью промиса
+                    auth.onAuthStateChanged(async (user) => {
+                        if (user) {
+                            const userData = await DataSource.getUserById(user.uid)
+                            setUser(userData)
+                        } else {
+                            console.log('Plese log in')
+                        }
+                    })
+                }
+            } catch (error) {
+                console.error(error)
             }
         }
+        fetching()
     }, [])
 
     return (

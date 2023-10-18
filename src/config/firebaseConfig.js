@@ -1,5 +1,7 @@
+import { FIREBASE_API_KEY } from './env'
+
 const firebaseConfig = {
-    apiKey: 'AIzaSyC37_lS2LDZsq4BeQl4BEmAkhcqipGxiDc',
+    apiKey: FIREBASE_API_KEY,
     authDomain: 'kaivo-e7185.firebaseapp.com',
     projectId: 'kaivo-e7185',
     storageBucket: 'kaivo-e7185.appspot.com',
