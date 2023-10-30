@@ -13,14 +13,14 @@ import userCoverDefault from '../images/backgrounds/Background.png'
 
 export default class DataSource {
 
-    static getPosts = async (lastDoc, postsLimit = 10) => {
+    static getPosts = async (lastDoc, postsLimit = 10, orderByConfig = { fieldPath, direction }) => {
         // код, получающий посты
         try {
             const size = await this.getCollectionSize('posts')
 
             const querySnapshot = lastDoc
-                ? await getDocs(query(collection(db, 'posts'), startAfter(lastDoc), limit(postsLimit)))
-                : await getDocs(query(collection(db, 'posts'), limit(postsLimit)))
+                ? await getDocs(query(collection(db, 'posts'), orderBy(orderByConfig.fieldPath, orderByConfig.direction), startAfter(lastDoc), limit(postsLimit)))
+                : await getDocs(query(collection(db, 'posts'), orderBy(orderByConfig.fieldPath, orderByConfig.direction), limit(postsLimit)))
 
             const responseDataArray = []
 
@@ -378,33 +378,6 @@ export default class DataSource {
         } catch (error) {
             console.error("Ошибка при получении размера коллекции:", error)
             return 0
-        }
-    }
-
-    static getPopularPosts = async (postsLimit = 2) => {
-        try {
-
-            const querySnapshot = await getDocs(query(collection(db, 'posts'), orderBy('likes', 'desc'), limit(postsLimit)))
-
-            const responseDataArray = []
-
-            querySnapshot.forEach(post => {
-                if (post.exists()) {
-                    responseDataArray.push(post.data())
-                }
-            })
-
-            const posts = await Promise.all(responseDataArray.map(async post => {
-                const content = await this._getPostMedia(post)
-
-                const user = await this.getUserById(post?.userId)
-
-                return { ...post, content, user }
-            }))
-
-            return posts
-        } catch (error) {
-            console.log(defineError(error?.message))
         }
     }
 

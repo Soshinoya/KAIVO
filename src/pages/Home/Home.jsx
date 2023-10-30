@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 import styles from './Home.module.scss'
 
@@ -13,43 +14,47 @@ import Loader from '../../components/atoms/Loader'
 
 const Home = () => {
 
-    const [postsData, setPostsData] = useState([])
+    const { data, refetch, isFetching, isError, error } = useQuery({
+        queryKey: ['feedPosts'],
+        queryFn: async () => {
+            const { posts, lastDoc, size } = await DataSource.getPosts(data?.lastDoc, 2, { fieldPath: 'date.value', direction: 'desc' })
+            return { posts: data?.posts?.length > 0 ? [...data?.posts, ...posts] : posts, lastDoc, size }
+        },
+        refetchOnWindowFocus: false,
+        enabled: false
+    })
 
-    const [lastDoc, setLastDoc] = useState()
+    const [postsData, setPostsData] = useState(data?.posts || [])
 
-    const [totalPostsCount, setTotalPostsCount] = useState(0)
+    const [selectedValue, setSelectedValue] = useState('latest')
 
-    const [fetching, setFetching] = useState(true)
+    if (isError) {
+        console.error(error)
+    }
 
-    const [selectedValue, setSelectedValue] = useState('trending')
-
-    // Получение постов
     useEffect(() => {
-        if (fetching) {
-            DataSource.getPosts(lastDoc, 5)
-                .then(({ posts, lastDoc, size }) => {
-                    setPostsData([...postsData, ...posts])
-                    setLastDoc(lastDoc)
-                    setTotalPostsCount(size)
-                })
-                .catch(error => console.log(error.message))
-                .finally(() => {
-                    setFetching(false)
-                })
+        setPostsData(data?.posts || [])
+    }, [data])
+
+    useEffect(() => {
+        if (data?.posts?.length > 0) {
+            setPostsData(data?.posts)
+        } else {
+            refetch()
         }
-    }, [fetching])
+    }, [])
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
         return function () {
             document.removeEventListener('scroll', scrollHandler)
         }
-    }, [postsData])
+    }, [data])
 
     const scrollHandler = e => {
         if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100
-            && postsData.length < totalPostsCount) {
-            setFetching(true)
+            && postsData.length < data?.size || 0) {
+            refetch()
         }
     }
 
@@ -70,8 +75,10 @@ const Home = () => {
         <div className={`${styles['home']}`}>
             <ContentConfig selectConfig={selectConfig} />
             <div className={`${styles['home__content']}`}>
-                {postsData.length > 0 && postsData?.map(post => <PostPreviewLarge {...post} key={post.id} />)}
-                <Loader isLoading={fetching} />
+                {postsData?.length > 0 && postsData?.map(post => {
+                    return <PostPreviewLarge {...post} key={post.id} />
+                })}
+                <Loader isLoading={isFetching} />
             </div>
         </div>
     )

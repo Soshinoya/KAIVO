@@ -2,14 +2,20 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
 import { CryptoContext } from './context/CryptoContext'
 import { AnimateContext } from './context/AnimateContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <CryptoContext>
-    <AnimateContext>
-      <App />
-    </AnimateContext>
-  </CryptoContext>
+  <QueryClientProvider client={queryClient}>
+    <CryptoContext>
+      <AnimateContext>
+        <App />
+      </AnimateContext>
+    </CryptoContext>
+  </QueryClientProvider>
 )
