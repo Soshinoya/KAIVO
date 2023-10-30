@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 
 import styles from './Home.module.scss'
 
-import DataSource from '../../service/DataSource'
+import { useFeedPosts } from '../../query-hooks/useFeedPosts'
 
 import { getRandomUUID } from '../../utils/getRandomUUID'
 import { sortPosts } from '../../utils/sortPosts'
@@ -14,15 +13,9 @@ import Loader from '../../components/atoms/Loader'
 
 const Home = () => {
 
-    const { data, refetch, isFetching, isError, error } = useQuery({
-        queryKey: ['feedPosts'],
-        queryFn: async () => {
-            const { posts, lastDoc, size } = await DataSource.getPosts(data?.lastDoc, 2, { fieldPath: 'date.value', direction: 'desc' })
-            return { posts: data?.posts?.length > 0 ? [...data?.posts, ...posts] : posts, lastDoc, size }
-        },
-        refetchOnWindowFocus: false,
-        enabled: false
-    })
+    const [dataLink, setDataLink] = useState({})
+
+    const { data, refetch, isFetching, isError, error } = useFeedPosts(dataLink, 2, { fieldPath: 'date.value', direction: 'desc' })
 
     const [postsData, setPostsData] = useState(data?.posts || [])
 
@@ -31,6 +24,10 @@ const Home = () => {
     if (isError) {
         console.error(error)
     }
+
+    useEffect(() => {
+        setDataLink(data)
+    }, [data])
 
     useEffect(() => {
         setPostsData(data?.posts || [])

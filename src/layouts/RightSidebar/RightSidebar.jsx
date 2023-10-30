@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
 
 import styles from './RightSidebar.module.scss'
 
 import DataSource from '../../service/DataSource'
+
+import { useBestPosts } from '../../query-hooks/useBestPosts'
 
 import { Crypto } from '../../context/CryptoContext'
 
@@ -14,15 +15,9 @@ import PostsContainer from '../../components/organisms/PostsContainer/PostsConta
 
 const RightSidebar = ({ tagsData, setTagsData }) => {
 
-    const { data: dataPopularPosts, refetch: refetchPopularPosts, isError: isErrorPopularPosts, error: errorPopularPosts} = useQuery({
-        queryKey: ['bestPosts'],
-        queryFn: async () => {
-            const { posts, lastDoc, size } = await DataSource.getPosts(dataPopularPosts?.lastDoc, 2, { fieldPath: 'likes', direction: 'desc' })
-            return { posts: dataPopularPosts?.posts?.length > 0 ? [...dataPopularPosts?.posts, ...posts] : posts, lastDoc, size }
-        },
-        refetchOnWindowFocus: false,
-        enabled: false
-    })
+    const [dataPopularPostsLink, setDataPopularPostsLink] = useState({})
+
+    const { data: dataPopularPosts, refetch: refetchPopularPosts, isError: isErrorPopularPosts, error: errorPopularPosts} = useBestPosts(dataPopularPostsLink, 2, { fieldPath: 'likes', direction: 'desc' })
 
     const { user } = useContext(Crypto)
 
@@ -35,6 +30,10 @@ const RightSidebar = ({ tagsData, setTagsData }) => {
     if (isErrorPopularPosts) {
         console.log(errorPopularPosts)
     }
+
+    useEffect(() => {
+        setDataPopularPostsLink(dataPopularPosts)
+    }, [dataPopularPosts])
 
     useEffect(() => {
         if (user?.subscriptions?.length > 0) {

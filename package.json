@@ -12,6 +12,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.1",
     "sass": "^1.57.1",
     "uuid": "^9.0.0"
   },
