@@ -1,23 +1,26 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
-import { Crypto } from './CryptoContext'
+import { USER } from '../../service/queryKeys'
 
-const BackgroundAnimate = createContext()
+const BgAnimation = ({ children }) => {
 
-const AnimateContext = ({ children }) => {
+    const queryClient = useQueryClient()
 
-    const { user } = useContext(Crypto)
+    const user = queryClient.getQueryData([USER])
 
     const [isEnabled, setIsEnabled] = useState(false)
 
     useEffect(() => {
-        if (user?.interfaceSettings?.isBackgroundAnimationEnabled ?? false) {
+        if (user?.interfaceSettings?.isBackgroundAnimationEnabled) {
             setIsEnabled(true)
+        } else {
+            setIsEnabled(false)
         }
     }, [user])
 
     return (
-        <BackgroundAnimate.Provider value={{ isEnabled, setIsEnabled }}>
+        <>
             <div>
                 {children}
             </div>
@@ -97,8 +100,8 @@ const AnimateContext = ({ children }) => {
                     <span style={{ '--i': 12 }}></span>
                 </div>
             </div>}
-        </BackgroundAnimate.Provider>
+        </>
     )
 }
 
-export { AnimateContext, BackgroundAnimate }
+export { BgAnimation }

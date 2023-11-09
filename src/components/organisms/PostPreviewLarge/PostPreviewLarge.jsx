@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import styles from './PostPreviewLarge.module.scss'
 
 import PostActions from '../../../service/PostActions'
+
+import { USER } from '../../../service/queryKeys'
 
 import { getRandomUUID } from '../../../utils/getRandomUUID'
 import { textToHTML } from '../../../utils/parser'
@@ -15,6 +18,10 @@ import BookmarkIcon from '../../atoms/icons/BookmarkIcon'
 import PostPreviewHeader from '../../molecules/PostPreviewHeader/PostPreviewHeader'
 
 const PostPreviewLarge = ({ id, category, content, date, user, providedActions = [], buttonConfig }) => {
+
+    const queryClient = useQueryClient()
+
+    const currentUser = queryClient.getQueryData([USER])
 
     const postRef = useRef(null)
 
@@ -57,29 +64,35 @@ const PostPreviewLarge = ({ id, category, content, date, user, providedActions =
     const actions = providedActions.length > 0 ? providedActions : [
         {
             title: 'Complain',
-            action: () => PostActions.complainOnPost(id).catch(console.log),
+            action: () => PostActions.complainOnPost(id, currentUser?.id).catch(console.log),
             id: getRandomUUID()
         }
     ]
 
     const [isLiked, setIsLiked] = useState(false) // дефолтное значени должно браться из выражения: Находиться ли id пользователя в массиве всех тех, кто поставил лайк
 
-    const onClickLike = () => {
+    const onClickLike = async () => {
         if (isLiked) {
             // удаление id пользователя из тех, кто поставил лайк данному посту
-            PostActions.removeLike(id)
-                .then(setIsLiked)
-                .catch(console.log)
+            try {
+                const boo = await PostActions.removeLike(id, currentUser?.id)
+                setIsLiked(boo)
+            } catch (error) {
+                console.error(error)
+            }
         } else {
             // добавление id пользователя к тем, кто поставил лайк данному посту
-            PostActions.addLike(id)
-                .then(setIsLiked)
-                .catch(console.log)
+            try {
+                const boo = await PostActions.addLike(id, currentUser?.id)
+                setIsLiked(boo)
+            } catch (error) {
+                console.error(error)
+            }
         }
     }
 
     useEffect(() => {
-        PostActions.checkLike(id).then(setIsLiked)
+        PostActions.checkLike(id, currentUser?.id).then(setIsLiked)
     }, [])
 
     const onClickComment = () => console.log('Comment icon was clicked')

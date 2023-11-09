@@ -1,13 +1,13 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import Authentication from '../../../service/Authentication'
 
-import { validateByName } from '../../../utils/validateByName'
-import { addToLS } from '../../../utils/localStorageActions'
-import { blurBackground } from '../../../utils/blurBackground'
+import { USER } from '../../../service/queryKeys'
 
-import { Crypto } from '../../../context/CryptoContext'
+import { validateByName } from '../../../utils/validateByName'
+import { blurBackground } from '../../../utils/blurBackground'
 
 import ButtonWide from '../../atoms/ButtonWide'
 import InputBordered from '../../atoms/InputBordered'
@@ -20,7 +20,17 @@ const Form = ({ inputsInfo, btnText, secondaryText, secondaryLinkText, secondary
 
     const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
 
-    const { setUser, setUserPrivateInfo } = useContext(Crypto)
+    const queryClient = useQueryClient()
+
+    const { mutate: mutateUser } = useMutation({
+        mutationKey: [USER],
+        mutationFn(updatedUser) {
+            return updatedUser
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const navigate = useNavigate()
 
@@ -57,40 +67,42 @@ const Form = ({ inputsInfo, btnText, secondaryText, secondaryLinkText, secondary
         if (updatedErrors.length === 0) {
             switch (actionOnSubmit) {
                 case 'login':
-                    Authentication.login({
-                        email: formData.get('email'),
-                        password: formData.get('password')
-                    })
-                        .then(({ userInfo, userPrivateInfo }) => {
-                            addToLS('userId', userInfo?.id)
-                            setUser(userInfo)
-                            setUserPrivateInfo(userPrivateInfo)
-                        })
-                        .then(() => navigate('/'))
-                        .catch(error => console.log('<<<Error at login>>>', error.message))
-                        .finally(() => {
+                    const login = async () => {
+                        try {
+                            const userInfo = await Authentication.login({
+                                email: formData.get('email'),
+                                password: formData.get('password')
+                            })
+                            mutateUser(userInfo)
+                            navigate('/')
+                        } catch (error) {
+                            console.error('<<<Error at login>>>', error?.message)
+                        } finally {
                             setIsBlurLoaderLoading(false)
                             blurBackground(false)
-                        })
+                        }
+                    }
+                    login()
                     // Добавить сообщения об исходе операции 2. В случае ошибки сообщение ошибки можно получить - (error.message)
                     break;
                 case 'register':
-                    Authentication.register({
-                        nickname: formData.get('nickname'),
-                        email: formData.get('email'),
-                        password: formData.get('password')
-                    })
-                        .then(({ userInfo, userPrivateInfo }) => {
-                            addToLS('userId', userInfo?.id)
-                            setUser(userInfo)
-                            setUserPrivateInfo(userPrivateInfo)
-                        })
-                        .then(() => navigate('/'))
-                        .catch(error => console.log('<<<Error at register>>>', error.message))
-                        .finally(() => {
+                    const register = async () => {
+                        try {
+                            const userInfo = await Authentication.register({
+                                nickname: formData.get('nickname'),
+                                email: formData.get('email'),
+                                password: formData.get('password')
+                            })
+                            mutateUser(userInfo)
+                            navigate('/')
+                        } catch (error) {
+                            console.error('<<<Error at register>>>', error?.message)
+                        } finally {
                             setIsBlurLoaderLoading(false)
                             blurBackground(false)
-                        })
+                        }
+                    }
+                    register()
                     // Добавить сообщения об исходе операции 2. В случае ошибки сообщение ошибки можно получить - (error.message)
                     break;
 

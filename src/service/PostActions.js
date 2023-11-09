@@ -1,13 +1,11 @@
 import { doc, getDoc, query, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from './database/firebase'
 
-import { getFromLS } from '../utils/localStorageActions'
 import { defineError } from '../utils/defineError'
 export default class PostActions {
 
-    static complainOnPost = async postId => {
+    static complainOnPost = async (postId, userId) => {
         try {
-            const userId = getFromLS('userId')
             if (!userId) throw new Error('UnauthorizedError').message
 
             const queryGetSnapshot = await getDoc(query(doc(db, 'complaints', postId)))
@@ -36,7 +34,6 @@ export default class PostActions {
                     type: 'post',
                     usersWhoComplained: [userId]
                 }
-                debugger
                 await setDoc(doc(db, 'complaints', postId), complainTemplate)
             }
         } catch (error) {
@@ -44,9 +41,8 @@ export default class PostActions {
         }
     }
 
-    static checkLike = async postId => {
+    static checkLike = async (postId, userId) => {
         try {
-            const userId = getFromLS('userId')
             if (!userId) return false
 
             let isLiked = false
@@ -66,9 +62,8 @@ export default class PostActions {
         }
     }
 
-    static addLike = async postId => {
+    static addLike = async (postId, userId) => {
         try {
-            const userId = getFromLS('userId')
             if (!userId) throw new Error('UnauthorizedError').message
 
             let isLiked = false
@@ -89,9 +84,8 @@ export default class PostActions {
         }
     }
 
-    static removeLike = async postId => {
+    static removeLike = async (postId, userId) => {
         try {
-            const userId = getFromLS('userId')
             if (!userId) throw new Error('UnauthorizedError').message
 
             let isLiked = true

@@ -1,42 +1,50 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './Register.module.scss'
 
 import { getRandomUUID } from '../../utils/getRandomUUID'
 import { blurBackground } from '../../utils/blurBackground'
-import { addToLS } from '../../utils/localStorageActions'
-
-import { Crypto } from '../../context/CryptoContext'
 
 import Authentication from '../../service/Authentication'
+
+import { USER } from '../../service/queryKeys'
 
 import ButtonWideInvert from '../../components/atoms/ButtonWideInvert'
 import Form from '../../components/molecules/Form/Form'
 import BlurLoader from '../../components/atoms/BlurLoader'
 
 const Register = () => {
-    const { setUser } = useContext(Crypto)
+
+    const queryClient = useQueryClient()
+
+    const { mutate: mutateUser } = useMutation({
+        mutationKey: [USER],
+        mutationFn(updatedUser) {
+            return updatedUser
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const navigate = useNavigate()
 
     const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
 
-    const registerWithGoogle = () => {
-        setIsBlurLoaderLoading(true)
-        Authentication.registerWithGoogle()
-            .then(userInfo => {
-                setIsBlurLoaderLoading(false)
-                blurBackground(false)
-                addToLS('userId', userInfo?.id)
-                setUser(userInfo)
-            })
-            .then(() => navigate('/'))
-            .catch(console.log)
-            .finally(() => {
-                setIsBlurLoaderLoading(false)
-                blurBackground(false)
-            })
+    const registerWithGoogle = async () => {
+        try {
+            setIsBlurLoaderLoading(true)
+            const userInfo = await Authentication.registerWithGoogle()
+            mutateUser(userInfo)
+            navigate('/')
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsBlurLoaderLoading(false)
+            blurBackground(false)
+        }
     }
 
     const inputsInfo = [

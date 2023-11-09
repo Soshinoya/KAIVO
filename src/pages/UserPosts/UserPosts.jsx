@@ -1,15 +1,18 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import styles from './UserPosts.module.scss'
 
 import DataSource from "../../service/DataSource"
 import AccountActions from "../../service/AccountActions"
 
+import { USER } from "../../service/queryKeys"
+
+import { useUser } from "../../query-hooks/useUser"
+
 import { sortPosts } from '../../utils/sortPosts'
 import { getRandomUUID } from '../../utils/getRandomUUID'
-
-import { Crypto } from '../../context/CryptoContext'
 
 import Loader from '../../components/atoms/Loader'
 import Breadcrumbs from '../../components/atoms/Breadcrumbs'
@@ -19,7 +22,19 @@ import BlurLoader from '../../components/atoms/BlurLoader'
 
 const UserPosts = () => {
 
-    const { user, setUser } = useContext(Crypto)
+    const queryClient = useQueryClient()
+
+    const user = queryClient.getQueryData([USER])
+
+    const { mutate: mutateUser } = useMutation({
+        mutationKey: [USER],
+        mutationFn(updatedUser) {
+            return updatedUser
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
 
@@ -98,12 +113,16 @@ const UserPosts = () => {
         : {
             btnText: 'Follow',
             btnSize: 'small',
-            btnOnClick: () => {
-                setIsBlurLoaderLoading(true)
-                AccountActions.subscribeToUser(userId, 'user', { user, setUser })
-                    .then(() => setIsFollower(true))
-                    .catch(console.log)
-                    .finally(() => setIsBlurLoaderLoading(false))
+            async btnOnClick() {
+                try {
+                    setIsBlurLoaderLoading(true)
+                    await AccountActions.subscribeToUser(userId, 'user', { user, mutateUser })
+                    setIsFollower(true)
+                } catch (error) {
+                    console.error(error)
+                } finally {
+                    setIsBlurLoaderLoading(false)
+                }
             }
         }
 

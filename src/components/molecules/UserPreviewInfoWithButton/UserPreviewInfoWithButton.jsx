@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { formatTimeDifference, formatDate } from '../../../utils/formatTime'
 
 import styles from './UserPreviewInfoWithButton.module.scss'
 
-import { Crypto } from '../../../context/CryptoContext'
-
 import AccountActions from '../../../service/AccountActions'
+
+import { USER } from '../../../service/queryKeys'
 
 import UserAvatar from '../../atoms/UserAvatar'
 import Button from '../../atoms/Button'
@@ -16,7 +17,19 @@ const UserPreviewInfoWithButton = ({ id: userId, nickname, userImageSrc, userIma
 
     const userProfileUrl = `/users/${userId}`
 
-    const { user, setUser } = useContext(Crypto)
+    const queryClient = useQueryClient()
+
+    const user = queryClient.getQueryData([USER])
+
+    const { mutate: mutateUser } = useMutation({
+        mutationKey: [USER],
+        mutationFn(updatedUser) {
+            return updatedUser
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const [isFollower, setIsFollower] = useState(false)
 
@@ -51,10 +64,13 @@ const UserPreviewInfoWithButton = ({ id: userId, nickname, userImageSrc, userIma
                 btnConfig = {
                     text: btnText,
                     size: btnSize,
-                    onClick: () => {
-                        AccountActions.subscribeToUser(userId, 'user', { user, setUser })
-                            .then(() => setIsFollower(true))
-                            .catch(console.log)
+                    async onClick() {
+                        try {
+                            await AccountActions.subscribeToUser(userId, 'user', { user, mutateUser })
+                            setIsFollower(true)
+                        } catch (error) {
+                            console.error(error)
+                        }
                     }
                 }
             }

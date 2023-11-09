@@ -1,42 +1,52 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './LogIn.module.scss'
 
 import { getRandomUUID } from '../../utils/getRandomUUID'
 import { blurBackground } from '../../utils/blurBackground'
-import { addToLS } from '../../utils/localStorageActions'
+import { defineError } from '../../utils/defineError'
 
-import { Crypto } from '../../context/CryptoContext'
+import { USER } from '../../service/queryKeys'
 
 import Authentication from '../../service/Authentication'
 
-import ButtonWideInvert from '../../components/atoms/ButtonWideInvert'
 import Form from '../../components/molecules/Form/Form'
+
+import ButtonWideInvert from '../../components/atoms/ButtonWideInvert'
 import BlurLoader from '../../components/atoms/BlurLoader'
-import { defineError } from '../../utils/defineError'
 
 const LogIn = () => {
 
-    const { setUser } = useContext(Crypto)
+    const queryClient = useQueryClient()
+
+    const { mutate: mutateUser } = useMutation({
+        mutationKey: [USER],
+        mutationFn(updatedUser) {
+            return updatedUser
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const navigate = useNavigate()
 
     const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
 
     const loginWithGoogle = async () => {
-        setIsBlurLoaderLoading(true)
-        Authentication.loginWithGoogle()
-            .then(userInfo => {
-                addToLS('userId', userInfo?.id)
-                setUser(userInfo)
-            })
-            .then(() => navigate('/'))
-            .catch(err => console.log(defineError(err?.message)))
-            .finally(() => {
-                setIsBlurLoaderLoading(false)
-                blurBackground(false)
-            })
+        try {
+            setIsBlurLoaderLoading(true)
+            const userInfo = await Authentication.loginWithGoogle()
+            mutateUser(userInfo)
+            navigate('/')
+        } catch (error) {
+            console.error(defineError(error?.message))
+        } finally {
+            setIsBlurLoaderLoading(false)
+            blurBackground(false)
+        }
     }
 
     const inputsInfo = [

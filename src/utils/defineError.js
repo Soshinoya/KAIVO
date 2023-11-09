@@ -36,6 +36,9 @@ export const defineError = (message = '') => {
         case 'UnauthorizedError':
             return 'Unauthorized'
             
+        case 'PLEASE_LOGIN':
+            return 'Please log in'
+            
         case 'COMPLAINT_WAS_SENT':
             return 'You`ve already sent a complaint'
     

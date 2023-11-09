@@ -9,7 +9,7 @@ const UsersInfoBlock = ({ title, usersInfo, usersImageSize = 'sm', titleClassNam
         <div className={`panel ${styles['users-block']}`}>
             <h4>{title}</h4>
             <ul className={`${styles['users-block__inner']}`}>
-                {usersInfo.map(user => (
+                {usersInfo?.map(user => (
                     <li key={user.id}>
                         <UserPreviewInfoWithButton {...user} userImageSize={usersImageSize} titleClassName={titleClassName} textGap={0} btnText={btnText} btnSize={btnSize} btnOnClick={btnOnClick} />
                     </li>

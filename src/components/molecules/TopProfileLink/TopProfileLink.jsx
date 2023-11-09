@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+
 import { signOut } from 'firebase/auth'
+
 import { auth } from '../../../service/database/firebase'
 
 import styles from './TopProfileLink.module.scss'
-
-import { removeFromLS } from '../../../utils/localStorageActions'
 
 import ArrowDownIcon from '../../atoms/icons/ArrowDownIcon'
 import SettingsIcon from '../../atoms/icons/SettingsIcon'
@@ -13,17 +13,16 @@ import LeaveIcon from '../../atoms/icons/LeaveIcon'
 
 import UserAvatar from '../../atoms/UserAvatar'
 
-const TopProfileLink = ({ userId, userTitle, userImageSrc, userProfileUrl, userImageSize = 'md', direction = 'down' }) => {
+const TopProfileLink = ({ userId, userTitle, userImageSrc, userProfileUrl, userImageSize = 'md', direction = 'down', logOutMutate }) => {
 
     const [menu, setMenu] = useState(false)
 
     const navigate = useNavigate()
 
     const onLogoutClickHandler = async () => {
-        removeFromLS('userId')
         await signOut(auth)
+        logOutMutate()
         navigate('/')
-        window.location.reload()
     }
 
     return (

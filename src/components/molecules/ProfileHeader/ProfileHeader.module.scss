@@ -13,7 +13,8 @@ div.wrapper {
     position: relative;
     overflow: hidden;
 
-    .cover__image {
+    .cover__image,
+    .cover__image-loader {
         background-color: rgba(0, 0, 0, 0.1);
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;

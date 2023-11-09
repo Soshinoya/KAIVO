@@ -1,14 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { arrayUnion, doc, setDoc } from 'firebase/firestore'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { db } from '../../service/database/firebase'
 import YandexDrive from '../../service/YandexDrive'
 import AccountActions from '../../service/AccountActions'
 
+import { USER } from '../../service/queryKeys'
+
 import styles from './EditorPage.module.scss'
 
-import { getFromLS } from '../../utils/localStorageActions'
 import { getRandomUUID } from '../../utils/getRandomUUID'
 import { validateByName } from '../../utils/validateByName'
 import { HTMLToText } from '../../utils/parser'
@@ -22,6 +24,20 @@ import BlurLoader from '../../components/atoms/BlurLoader'
 import Breadcrumbs from '../../components/atoms/Breadcrumbs'
 
 const EditorPage = () => {
+
+    const queryClient = useQueryClient()
+
+    const user = queryClient.getQueryData([USER])
+
+    const { mutateAsync: mutateUser } = useMutation({
+        mutationKey: [USER],
+        async mutationFn(updatedProperties) {
+            return await AccountActions.updateAccountProperties(user.id, updatedProperties)
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
 
@@ -42,7 +58,7 @@ const EditorPage = () => {
     const [imageFiles, setImageFiles] = useState([])
 
     useEffect(() => {
-        if (!getFromLS('userId')) {
+        if (!user.id) {
             navigate('/')
         }
     }, [])
@@ -113,7 +129,7 @@ const EditorPage = () => {
                     type: 'date',
                     value: Date.now()
                 },
-                userId: getFromLS('userId'),
+                userId: user.id,
                 likes: [],
                 tags: formRef.current.querySelector('[name=tags]')?.value.split(' ').map(tag => tag.toLowerCase())
             }
@@ -132,7 +148,7 @@ const EditorPage = () => {
                 await YandexDrive.uploadFile(fileInputRef.current.files[0], `/kaivo/posts/${postId}/postImage.${previewImageExtension}`)
             }
 
-            await AccountActions.updateAccountProperties(getFromLS('userId'), { posts: arrayUnion(postId) })
+            await mutateUser({ posts: arrayUnion(postId) })
         } catch (error) {
             console.log(defineError(error?.message))
         } finally {

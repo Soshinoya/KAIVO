@@ -1,5 +1,3 @@
-@use "../../../styles/base/variables.scss";
-
 div .user-bar {
     display: flex;
     flex-direction: column;
@@ -9,6 +7,6 @@ div .user-bar {
     &__inner {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 20px;
     }
 }

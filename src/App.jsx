@@ -2,6 +2,10 @@ import React from 'react'
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
+import { useUser } from './query-hooks/useUser'
+
+import { BgAnimation } from './components/atoms/BgAnimation'
+
 import Home from './pages/Home/Home'
 import Category from './pages/Category/Category'
 import SinglePostPage from './pages/SinglePostPage/SinglePostPage'
@@ -26,44 +30,50 @@ const categories = [
 ]
 
 function App() {
+
+  useUser()
+
   return (
-    <BrowserRouter>
-      <div className='App'>
-        <Routes>
-          <Route path='/' element={<BasicLayout />}>
-            <Route index element={<Home />} />
+    <BgAnimation>
+      <BrowserRouter>
+        <div className='App'>
+          <Routes>
 
-            <Route path='/search' element={<Search />} />
+            <Route path='/' element={<BasicLayout />}>
+              <Route index element={<Home />} />
 
-            <Route path='/search/:dataType' element={<SearchResults />} />
+              <Route path='/search' element={<Search />} />
 
-            <Route path='/users/:id' element={<Profile />} />
-            {categories.map((category) => (
-              <Route
-                key={category.name}
-                path='/users/:id/:categoryName'
-                element={<UserPosts />}
-              />
-            ))}
+              <Route path='/search/:dataType' element={<SearchResults />} />
 
-            <Route path='/category' element={<Category category='livery' />} />
-            {categories.map((category) => (
-              <React.Fragment key={category.name}>
-                <Route path={`/category/${category.path}`} element={<Category category={category.name} />} />
-                <Route path={`/category/${category.path}/:id`} element={<SinglePostPage />} />
-              </React.Fragment>
-            ))}
+              <Route path='/users/:id' element={<Profile />} />
+              {categories.map((category) => (
+                <Route
+                  key={category.name}
+                  path='/users/:id/:categoryName'
+                  element={<UserPosts />}
+                />
+              ))}
 
-            <Route path='/editor' element={<EditorPage />} />
+              <Route path='/category' element={<Category category='livery' />} />
+              {categories.map((category) => (
+                <React.Fragment key={category.name}>
+                  <Route path={`/category/${category.path}`} element={<Category category={category.name} />} />
+                  <Route path={`/category/${category.path}/:id`} element={<SinglePostPage />} />
+                </React.Fragment>
+              ))}
 
-          </Route>
-          <Route path='/*' element={<NotFound />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/register' element={<Register />} />
-        </Routes>
-        <div className='blur-bg'></div>
-      </div>
-    </BrowserRouter>
+              <Route path='/editor' element={<EditorPage />} />
+
+            </Route>
+            <Route path='/*' element={<NotFound />} />
+            <Route path='/login' element={<LogIn />} />
+            <Route path='/register' element={<Register />} />
+          </Routes>
+          <div className='blur-bg'></div>
+        </div>
+      </BrowserRouter>
+    </BgAnimation>
   )
 }
 

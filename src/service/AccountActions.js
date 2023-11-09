@@ -3,7 +3,6 @@ import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import { db } from './database/firebase'
 
 import { defineError } from '../utils/defineError'
-import { getFromLS } from '../utils/localStorageActions'
 
 
 export default class AccountActions {
@@ -18,7 +17,7 @@ export default class AccountActions {
 
     static subscribeToUser = async (subscriptionId, subscriptionType, localUserState = {}) => {
         try {
-            const loggedUserId = getFromLS('userId')
+            const loggedUserId = localUserState?.user?.id
             if (!loggedUserId) throw new Error('UnauthorizedError')
             await updateDoc(doc(db, 'users', loggedUserId), {
                 subscriptions: arrayUnion({ id: subscriptionId, type: subscriptionType })
@@ -26,9 +25,7 @@ export default class AccountActions {
             await updateDoc(doc(db, 'users', subscriptionId), {
                 followers: arrayUnion(loggedUserId)
             })
-            localUserState?.setUser(prevUser => {
-                return { ...prevUser, subscriptions: [...localUserState?.user?.subscriptions, { id: subscriptionId, type: subscriptionType }] }
-            })
+            localUserState?.mutateUser({ ...localUserState?.user, subscriptions: [...localUserState?.user?.subscriptions, { id: subscriptionId, type: subscriptionType }] })
         } catch (error) {
             throw new Error(defineError(error?.message)).message
         }
@@ -36,7 +33,7 @@ export default class AccountActions {
 
     static unsubscribeFromUser = async (subscriptionId, subscriptionType, localUserState = {}) => {
         try {
-            const loggedUserId = getFromLS('userId')
+            const loggedUserId = localUserState?.user?.id
             if (!loggedUserId) throw new Error('UnauthorizedError')
             await updateDoc(doc(db, 'users', loggedUserId), {
                 subscriptions: arrayRemove({ id: subscriptionId, type: subscriptionType })
@@ -44,9 +41,7 @@ export default class AccountActions {
             await updateDoc(doc(db, 'users', subscriptionId), {
                 followers: arrayRemove(loggedUserId)
             })
-            localUserState?.setUser(prevUser => {
-                return { ...prevUser, subscriptions: localUserState?.user?.subscriptions.filter(({ id }) => id !== subscriptionId) }
-            })
+            localUserState?.mutateUser({ ...localUserState?.user, subscriptions: localUserState?.user?.subscriptions.filter(({ id }) => id !== subscriptionId) })
         } catch (error) {
             throw new Error(defineError(error?.message)).message
         }

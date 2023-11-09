@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './Profile.module.scss'
 
@@ -8,12 +9,13 @@ import CameraIcon from '../../components/atoms/icons/CameraIcon'
 import VehicleIcon from '../../components/atoms/icons/VehicleIcon'
 import RoadIcon from '../../components/atoms/icons/RoadIcon'
 
-import { Crypto } from '../../context/CryptoContext'
+import { useUserById } from '../../query-hooks/useUserById'
+import { useUserPosts } from '../../query-hooks/useUserPosts'
+
+import { USER, USER_ID, USER_POSTS_BY } from '../../service/queryKeys'
 
 import DataSource from '../../service/DataSource'
 import AccountActions from '../../service/AccountActions'
-
-import { defineError } from '../../utils/defineError'
 
 import ProfileHeader from '../../components/molecules/ProfileHeader/ProfileHeader'
 import StatisticItem from '../../components/atoms/StatisticItem'
@@ -27,17 +29,36 @@ import PostFieldWrap from '../../components/molecules/PostFieldWrap/PostFieldWra
 
 const Profile = () => {
 
-    const { user, setUser } = useContext(Crypto)
+    const { id: userId } = useParams()
 
-    const [isLoading, setIsLoading] = useState(true)
+    const queryClient = useQueryClient()
 
-    const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
+    const user = queryClient.getQueryData([USER])
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const { mutate: mutateUser } = useMutation({
+        mutationKey: [USER],
+        mutationFn(updatedUser) {
+            return updatedUser
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
-    const [userData, setUserData] = useState()
+    const concatenatedUserIdQueryKey = `${USER_ID}${userId}`
 
-    const [postsData, setPostsData] = useState([])
+    const { data: userData, refetch: refetchUserData, isFetching: isUserDataFetching } = useUserById(concatenatedUserIdQueryKey, userId, { enabled: false })
+
+    const { mutate: mutateUserData } = useMutation({
+        mutationKey: [concatenatedUserIdQueryKey],
+        mutationFn(updatedUser) {
+            return updatedUser
+        }
+    })
+
+    const concatenatedUserPostsQueryKey = `${USER_POSTS_BY}${userId}`
+
+    const { data: postsData, refetch: refetchPostsData, isFetching: isPostsDataFetching } = useUserPosts(concatenatedUserPostsQueryKey, userData?.posts ?? [], 5, { enabled: false, initialData: {} })
 
     const [countOfCategoryPosts, setCountOfCategoryPosts] = useState({
         livery: 0,
@@ -46,21 +67,21 @@ const Profile = () => {
         blueprint: 0
     })
 
-    const { id: userId } = useParams()
-
     const isMyProfile = user?.id === userId ? true : false
+
+    const [isBlurLoaderLoading, setIsBlurLoaderLoading] = useState(false)
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const [isFollower, setIsFollower] = useState(false)
 
-    const [lastDocIndex, setLastDocIndex] = useState(0)
+    const [isCoverImageLoaded, setIsCoverImageLoaded] = useState(false)
 
-    const [fetching, setFetching] = useState(true)
+    const [isAvatarImageLoaded, setIsAvatarImageLoaded] = useState(false)
 
     useEffect(() => {
-        setUserData()
-        setFetching(true)
-        setPostsData([])
-        setLastDocIndex(0)
+        setIsCoverImageLoaded(false)
+        mutateUserData(null)
     }, [userId])
 
     // Устанавливаем значение isFollower
@@ -71,17 +92,14 @@ const Profile = () => {
 
     // Получение объекта пользователя
     useEffect(() => {
-        setIsLoading(true)
-        if (isMyProfile) {
-            setUserData(user)
-            setIsLoading(false)
-            return
+        if (userData) return
+
+        const fetchingUserData = async () => {
+            const updatedUser = await refetchUserData()
+            mutateUserData(updatedUser.data)
         }
 
-        DataSource.getUserById(userId)
-            .then(setUserData)
-            .catch(error => console.log(error.message))
-            .finally(() => setIsLoading(false))
+        fetchingUserData()
     }, [userId, user])
 
     //  Получение кол-ва постов в каждой категории
@@ -110,29 +128,13 @@ const Profile = () => {
             .catch(console.error)
     }, [userData])
 
-    // fetch posts
+    // Получение постов пользователя
     useEffect(() => {
-        if (!userData) return
-        if (fetching) {
-            try {
-                const fetchPosts = async () => {
-                    const newPosts = []
-                    await Promise.all([...userData?.posts]?.splice(lastDocIndex, 5)?.map(async postId => {
-                        const post = await DataSource.getPostById(postId)
-                        newPosts.push(post)
-                    }))
-                    setLastDocIndex([...postsData, ...newPosts].length)
-                    setPostsData([...postsData, ...newPosts])
-                }
-                fetchPosts()
-            } catch (error) {
-                console.log(defineError(error?.message))
-            } finally {
-                setFetching(false)
-            }
-        }
-    }, [userData, fetching])
+        if (!userData?.posts) return
+        refetchPostsData()
+    }, [userData])
 
+    // Добавляет обработчик на scroll
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
         return function () {
@@ -140,11 +142,12 @@ const Profile = () => {
         }
     }, [postsData])
 
+    // Определяет, когда пользователь докрутил до последнего поста
     const scrollHandler = e => {
         if (!userData) return
         if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100
-            && postsData.length < userData?.posts?.length) {
-            setFetching(true)
+            && postsData?.posts?.length < userData?.posts?.length) {
+            refetchPostsData()
         }
     }
 
@@ -160,24 +163,32 @@ const Profile = () => {
         btnConfig = {
             btnText: 'follow',
             btnSize: 'small',
-            btnOnClick: () => {
-                setIsBlurLoaderLoading(true)
-                AccountActions.subscribeToUser(userId, 'user', { user, setUser })
-                    .then(() => setIsFollower(true))
-                    .catch(console.log)
-                    .finally(() => setIsBlurLoaderLoading(false))
+            async btnOnClick() {
+                try {
+                    setIsBlurLoaderLoading(true)
+                    await AccountActions.subscribeToUser(userId, 'user', { user, mutateUser })
+                    setIsFollower(true)
+                } catch (error) {
+                    console.error(error)
+                } finally {
+                    setIsBlurLoaderLoading(false)
+                }
             }
         }
     } else if (isFollower) {
         btnConfig = {
             btnText: 'unsubscribe',
             btnSize: 'small',
-            btnOnClick: () => {
-                setIsBlurLoaderLoading(true)
-                AccountActions.unsubscribeFromUser(userId, 'user', { user, setUser })
-                    .then(() => setIsFollower(false))
-                    .catch(console.log)
-                    .finally(() => setIsBlurLoaderLoading(false))
+            async btnOnClick() {
+                try {
+                    setIsBlurLoaderLoading(true)
+                    await AccountActions.unsubscribeFromUser(userId, 'user', { user, mutateUser })
+                    setIsFollower(false)
+                } catch (error) {
+                    console.error(error)
+                } finally {
+                    setIsBlurLoaderLoading(false)
+                }
             }
         }
     }
@@ -198,6 +209,10 @@ const Profile = () => {
                             profileImageSrc={userData?.userImageSrc}
                             profileImageSize='xl'
                             coverImageSrc={userData?.coverImageSrc}
+                            isCoverImageLoaded={isCoverImageLoaded}
+                            setIsCoverImageLoaded={setIsCoverImageLoaded}
+                            isAvatarImageLoaded={isAvatarImageLoaded}
+                            setIsAvatarImageLoaded={setIsAvatarImageLoaded}
                             isMyProfile={isMyProfile}
                             {...btnConfig}
                         />
@@ -235,17 +250,27 @@ const Profile = () => {
                             </li>
                         </ul>
                         {isMyProfile && <PostFieldWrap text='Create a new post' to='/editor' />}
+                        {postsData?.posts?.length > 0 && (
+                            <ul className={`${styles['posts']}`}>
+                                {postsData.posts.map(post => (
+                                    <li key={post.id}>
+                                        <PostPreviewLarge {...post} />
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                        {isMyProfile && <SettingsModal
+                            isModalOpen={isModalOpen}
+                            setIsModalOpen={setIsModalOpen}
+                            nickname={userData?.nickname}
+                            number={userData?.accountInfo?.number}
+                            country={userData?.accountInfo?.country}
+                            status={userData?.status}
+                            secondaryText={userData?.secondaryText}
+                        />}
                     </>
                 )}
-                <Loader isLoading={isLoading} />
-                <ul className={`${styles['posts']}`}>
-                    {postsData.length > 0 && postsData.map(post => (
-                        <li key={post.id}>
-                            <PostPreviewLarge {...post} />
-                        </li>
-                    ))}
-                </ul>
-                <SettingsModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} nickname={userData?.nickname} number={userData?.accountInfo?.number} country={userData?.accountInfo?.country} status={userData?.status} secondaryText={userData?.secondaryText} />
+                <Loader isLoading={isUserDataFetching || isPostsDataFetching} />
             </div>
         </>
     )

@@ -7,6 +7,8 @@ import YandexDrive from './YandexDrive'
 import { defineError } from '../utils/defineError'
 import { HTMLToText, textToHTML } from '../utils/parser'
 
+import { userInitialData } from '../config/userInitialData'
+
 import postPreviewDefault from '../images/plug-image.jpg'
 import userImageDefault from '../images/pinksilvia.jpg'
 import userCoverDefault from '../images/backgrounds/Background.png'
@@ -77,25 +79,25 @@ export default class DataSource {
                 switch (user.userImageSrc) {
                     case 'default':
                         user.userImageSrc = userImageDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${id}/userImage.${user.userImageExtension}`)
                         user.userImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
 
                 switch (user.coverImageSrc) {
                     case 'default':
                         user.coverImageSrc = userCoverDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${id}/userCover.${user.coverImageExtension}`)
                         user.coverImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
 
                 return user
@@ -124,24 +126,24 @@ export default class DataSource {
                 switch (user.userImageSrc) {
                     case 'default':
                         user.userImageSrc = userImageDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.${user.userImageExtension}`)
                         user.userImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
                 switch (user.coverImageSrc) {
                     case 'default':
                         user.coverImageSrc = userCoverDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.${user.coverImageExtension}`)
                         user.coverImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
                 return user
             }))
@@ -152,41 +154,54 @@ export default class DataSource {
         }
     }
 
-    static getPopularUsers = async (usersLimit = 5) => {
-        // код, получающий только данные о пользователях
-
+    static getPopularUsers = async (id, usersLimit = 5) => {
+        // код, получающий данные популярных пользователей
         try {
-            const querySnapshot = await getDocs(query(collection(db, 'users'), orderBy('followers', 'asc'), limit(usersLimit)))
             const responseDataArray = []
+            const usersRef = collection(db, 'users')
 
-            querySnapshot.forEach(user => {
-                if (user.exists()) {
-                    responseDataArray.push(user.data())
+            let queryConfig = query(usersRef, orderBy('followers', 'asc'), limit(1));
+            let lastDoc;
+
+            while (responseDataArray.length < usersLimit) {
+                const querySnapshot = await getDocs(queryConfig)
+
+                const userData = querySnapshot.docs[0].data()
+
+                if (!userData?.followers?.includes(id)) {
+                    responseDataArray.push(userData)
                 }
-            })
 
-            const users = await Promise.all(responseDataArray.map(async user => {
+                lastDoc = querySnapshot.docs[0]
+
+                // Если пользователей меньше запрашиваемого количества, то делаем повторный запрос
+                if (responseDataArray.length < usersLimit) {
+                    queryConfig = query(usersRef, orderBy('followers', 'asc'), startAfter(lastDoc), limit(1))
+                }
+            }
+
+            const users = await Promise.all(responseDataArray?.map(async user => {
                 switch (user.userImageSrc) {
                     case 'default':
                         user.userImageSrc = userImageDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.${user.userImageExtension}`)
                         user.userImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
                 switch (user.coverImageSrc) {
                     case 'default':
                         user.coverImageSrc = userCoverDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.${user.coverImageExtension}`)
                         user.coverImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
                 return user
             }))
@@ -227,7 +242,7 @@ export default class DataSource {
                     // Если в дальнейшем будут добавлены группы (и соответственно возможность подписки на них) то некст кейсом нужно добавить обработку для типа 'group'
 
                     default:
-                        break;
+                        break
                 }
             }))
 
@@ -278,7 +293,7 @@ export default class DataSource {
 
         try {
             const userPosts = await getDocs(query(collection(db, 'posts'), where('userId', '==', userId)))
-            let newLastDoc;
+            let newLastDoc
             let size = 0
 
             userPosts.forEach(post => {
@@ -328,13 +343,13 @@ export default class DataSource {
         switch (post?.imageSrc) {
             case 'default':
                 post.imageSrc = postPreviewDefault
-                break;
+                break
             case 'custom':
                 const customImage = await YandexDrive.downloadFile(`/kaivo/posts/${post?.id}/postImage.${post?.imageExtension}`)
                 post.imageSrc = customImage
-                break;
+                break
             default:
-                break;
+                break
         }
 
         const html = textToHTML(post?.content)
@@ -384,25 +399,9 @@ export default class DataSource {
     static addUserToDB = async ({ nickname, id }) => {
 
         const userTemplate = {
+            ...userInitialData,
             id,
-            nickname,
-            userImageSrc: 'default',
-            userImageExtension: '',
-            coverImageSrc: 'default',
-            coverImageExtension: '',
-            secondaryText: 'secondary text',
-            status: 'status',
-            accountInfo: {
-                number: 0,
-                country: 'RUS'
-            },
-            interfaceSettings: {
-                isBackgroundAnimationEnabled: false
-            },
-            followers: [],
-            likes: 0,
-            posts: [],
-            subscriptions: []
+            nickname
         }
 
         const userRef = doc(db, 'users', id)
@@ -446,24 +445,24 @@ export default class DataSource {
                 switch (user.userImageSrc) {
                     case 'default':
                         user.userImageSrc = userImageDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.${user.userImageExtension}`)
                         user.userImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
                 switch (user.coverImageSrc) {
                     case 'default':
                         user.coverImageSrc = userCoverDefault
-                        break;
+                        break
                     case 'custom':
                         const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.${user.coverImageExtension}`)
                         user.coverImageSrc = customImage
-                        break;
+                        break
                     default:
-                        break;
+                        break
                 }
                 return user
             }))

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 
 import styles from './ProfileHeader.module.scss'
 
+import loaderImageSrc from '../../../images/loader.gif'
+
 import AccountActions from '../../../service/AccountActions'
 import YandexDrive from '../../../service/YandexDrive'
 
@@ -11,7 +13,7 @@ import Button from '../../atoms/Button'
 import UserAvatar from '../../atoms/UserAvatar'
 import BlurLoader from '../../atoms/BlurLoader'
 
-const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImageSize = 'xl', coverImageSrc, actions, isMyProfile, btnText = 'Follow', btnSize = 'small', btnOnClick }) => {
+const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImageSize = 'xl', coverImageSrc, isCoverImageLoaded, setIsCoverImageLoaded, isAvatarImageLoaded, setIsAvatarImageLoaded, actions, isMyProfile, btnText = 'Follow', btnSize = 'small', btnOnClick }) => {
 
     const navigate = useNavigate()
 
@@ -79,7 +81,8 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
     return (
         <div className={`panel ${styles['wrapper']}`}>
             <div className={`${styles['cover']}`}>
-                <img className={`${styles['cover__image']}`} src={coverImageSrc} alt='profile cover' />
+                <img style={{ display: isCoverImageLoaded ? 'block' : 'none' }} className={`${styles['cover__image']}`} src={coverImageSrc} alt='profile cover' onLoad={() => setIsCoverImageLoaded(true)} />
+                <img style={{ display: isCoverImageLoaded ? 'none' : 'block' }} className={`${styles['cover__image-loader']}`} src={loaderImageSrc} alt='loader animation' />
                 {isMyProfile && (
                     <div>
                         <div className={`${styles['cover__input-label']}`}>
@@ -91,7 +94,7 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
             </div>
             <div className={`${styles['profile-info']}`}>
                 <div className={`${styles['profile-info__inner']}`}>
-                    <UserAvatar size={adaptiveImageSize} src={profileImageSrc} fileInput={isMyProfile ? <input ref={avatarInputRef} type='file' onChange={() => imageInputChangeHandler('avatar')} /> : false} />
+                    <UserAvatar size={adaptiveImageSize} src={profileImageSrc} fileInput={isMyProfile ? <input ref={avatarInputRef} type='file' onChange={() => imageInputChangeHandler('avatar')} /> : false} isAvatarImageLoaded={isAvatarImageLoaded} setIsAvatarImageLoaded={setIsAvatarImageLoaded} />
                     <div className={`${styles['profile-info__text']}`}>
                         <h4>{nickname}</h4>
                         <p className='body-small'>{status}</p>

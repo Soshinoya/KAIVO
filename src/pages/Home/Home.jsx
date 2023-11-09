@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 import styles from './Home.module.scss'
 
-import { useFeedPosts } from '../../query-hooks/useFeedPosts'
+import { usePosts } from '../../query-hooks/usePosts'
+import { FEED_POSTS } from '../../service/queryKeys'
 
 import { getRandomUUID } from '../../utils/getRandomUUID'
 import { sortPosts } from '../../utils/sortPosts'
@@ -13,9 +14,7 @@ import Loader from '../../components/atoms/Loader'
 
 const Home = () => {
 
-    const [dataLink, setDataLink] = useState({})
-
-    const { data, refetch, isFetching, isError, error } = useFeedPosts(dataLink, 2, { fieldPath: 'date.value', direction: 'desc' })
+    const { data, refetch, isFetching, isError, error } = usePosts(FEED_POSTS, 2, { fieldPath: 'date.value', direction: 'desc' })
 
     const [postsData, setPostsData] = useState(data?.posts || [])
 
@@ -24,10 +23,6 @@ const Home = () => {
     if (isError) {
         console.error(error)
     }
-
-    useEffect(() => {
-        setDataLink(data)
-    }, [data])
 
     useEffect(() => {
         setPostsData(data?.posts || [])

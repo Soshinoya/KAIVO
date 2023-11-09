@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './SettingsModal.module.scss'
 
 import Countries from '../../../../service/Countries'
 import AccountActions from '../../../../service/AccountActions'
 
-import { validateByName } from '../../../../utils/validateByName'
+import { USER } from '../../../../service/queryKeys'
 
-import { Crypto } from '../../../../context/CryptoContext'
-import { BackgroundAnimate } from '../../../../context/AnimateContext'
+import { validateByName } from '../../../../utils/validateByName'
 
 import useCustomModal from '../../../../hooks/useCustomModal/useCustomModal'
 
@@ -23,25 +23,33 @@ import Button from '../../../atoms/Button'
 import Select from '../../../atoms/Select'
 import Toggle from '../../../atoms/Toggle'
 
-const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0, country = '', status = '', secondaryText = '' }) => {
+const SettingsModal = ({ isModalOpen, setIsModalOpen }) => {
 
     const [navigate, setNavigate] = useState('/')
 
-    const { user, setUser } = useContext(Crypto)
+    const queryClient = useQueryClient()
 
-    const { isEnabled: isEnabledBGAnimateContext, setIsEnabled: setIsEnabledBGAnimateContext } = useContext(BackgroundAnimate)
+    const user = queryClient.getQueryData([USER])
+
+    const { mutate } = useMutation({
+        mutationKey: [USER],
+        async mutationFn(updatedProperties) {
+            return await AccountActions.updateAccountProperties(user.id, updatedProperties)
+        },
+        onSuccess() {
+            queryClient.invalidateQueries([USER])
+        }
+    })
 
     const [content, setContent] = useState()
 
     const [countries, setCountries] = useState([])
 
-    const [countryCurrentValue, setCountryCurrentValue] = useState(country)
-
-    const [isBackgroundAnimationEnabled, setIsBackgroundAnimationEnabled] = useState(isEnabledBGAnimateContext)
+    const [countryCurrentValue, setCountryCurrentValue] = useState(user?.accountInfo?.country)
 
     useEffect(() => {
-        setCountryCurrentValue(country)
-    }, [country])
+        setCountryCurrentValue(user?.accountInfo?.country)
+    }, [user?.accountInfo?.country])
 
     useEffect(() => {
         Countries.getCountries().then(setCountries)
@@ -56,9 +64,7 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
     const onAccountFormSubmit = async e => {
         e.preventDefault()
         const formData = new FormData(accountForm.current)
-
         const updatedErrors = []
-
         formData.forEach((text, name) => {
             const output = validateByName(name, text)
             if (!output.boo) {
@@ -70,9 +76,8 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
                 setErrors(prevErrors => prevErrors?.filter(error => error.name !== name))
             }
         })
-
         if (updatedErrors.length <= 0) {
-            await AccountActions.updateAccountProperties(user?.id, {
+            mutate({
                 nickname: formData.get('nickname'),
                 status: formData.get('status'),
                 secondaryText: formData.get('secondaryText'),
@@ -81,38 +86,17 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
                     number: formData.get('number')
                 }
             })
-            setUser(prevUser => {
-                return {
-                    ...prevUser,
-                    nickname: formData.get('nickname'),
-                    status: formData.get('status'),
-                    secondaryText: formData.get('secondaryText'),
-                    accountInfo: {
-                        country: countryCurrentValue,
-                        number: formData.get('number')
-                    }
-                }
-            })
         }
     }
 
     const onInterfaceSettingsFormSubmit = async e => {
         e.preventDefault()
         const formData = new FormData(settingsForm.current)
-        await AccountActions.updateAccountProperties(user?.id, {
+        mutate({
             interfaceSettings: {
                 isBackgroundAnimationEnabled: Boolean(formData.get('background-animation-toggle')) || false
             }
         })
-        setUser(prevUser => {
-            return {
-                ...prevUser,
-                interfaceSettings: {
-                    isBackgroundAnimationEnabled: Boolean(formData.get('background-animation-toggle')) || false
-                }
-            }
-        })
-        setIsEnabledBGAnimateContext(Boolean(formData.get('background-animation-toggle')) || false)
     }
 
     const countrySelectConfig = {
@@ -163,20 +147,20 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
                         <div className={`${styles['account__wrapper']}`}>
                             <form ref={accountForm} className={`${styles['account']}`}>
                                 <div className={`${styles['account__input-inner']}`}>
-                                    <label htmlFor="nickname">Nickname | <span className='body-medium'>{nickname}</span></label>
-                                    <InputBordered type='text' name='nickname' initialValue={nickname} errors={errors} />
+                                    <label htmlFor="nickname">Nickname | <span className='body-medium'>{user?.nickname}</span></label>
+                                    <InputBordered type='text' name='nickname' initialValue={user?.nickname} errors={errors} />
                                 </div>
                                 <div className={`${styles['account__input-inner']}`}>
-                                    <label htmlFor="number">Number | <span className='body-medium'>{number}</span></label>
-                                    <InputBordered type='number' name='number' initialValue={number} errors={errors} />
+                                    <label htmlFor="number">Number | <span className='body-medium'>{user?.number}</span></label>
+                                    <InputBordered type='number' name='number' initialValue={user?.number} errors={errors} />
                                 </div>
                                 <div className={`${styles['account__input-inner']}`}>
-                                    <label htmlFor="status">Status | <span className='body-medium'>{status}</span></label>
-                                    <InputBordered type='status' name='status' initialValue={status} errors={errors} />
+                                    <label htmlFor="status">Status | <span className='body-medium'>{user?.status}</span></label>
+                                    <InputBordered type='status' name='status' initialValue={user?.status} errors={errors} />
                                 </div>
                                 <div className={`${styles['account__input-inner']}`}>
-                                    <label htmlFor="secondaryText">Secondary Text | <span className='body-medium'>{secondaryText}</span></label>
-                                    <InputBordered type='secondaryText' name='secondaryText' initialValue={secondaryText} errors={errors} />
+                                    <label htmlFor="secondaryText">Secondary Text | <span className='body-medium'>{user?.secondaryText}</span></label>
+                                    <InputBordered type='secondaryText' name='secondaryText' initialValue={user?.secondaryText} errors={errors} />
                                 </div>
                                 <div className={`${styles['account__field-inner']}`}>
                                     <h4>Country</h4>
@@ -203,7 +187,7 @@ const SettingsModal = ({ isModalOpen, setIsModalOpen, nickname = '', number = 0,
                             <form ref={settingsForm} className={`${styles['account']}`}>
                                 <div className={`${styles['account__field-inner']}`}>
                                     <h4>Enable background animation</h4>
-                                    <Toggle name='background-animation-toggle' checked={isEnabledBGAnimateContext} setChecked={setIsEnabledBGAnimateContext} />
+                                    <Toggle name='background-animation-toggle' checked={user?.interfaceSettings?.isBackgroundAnimationEnabled} />
                                 </div>
                             </form>
                             <div className={`${styles['account__submit']}`}>

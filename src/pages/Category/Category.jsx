@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './Category.module.scss'
 
-import DataSource from '../../service/DataSource'
+import { CATEGORY_POSTS } from '../../service/queryKeys'
 
 import { getRandomUUID } from '../../utils/getRandomUUID'
 import { sortPosts } from '../../utils/sortPosts'
+
+import { useCategoryPosts } from '../../query-hooks/useCategoryPosts'
 
 import PostPreviewSmall from '../../components/organisms/PostPreviewSmall/PostPreviewSmall'
 import Loader from '../../components/atoms/Loader'
@@ -13,15 +16,28 @@ import ContentConfig from '../../layouts/BasicLayout/ContentConfig'
 
 const Category = ({ category }) => {
 
+    const queryClient = useQueryClient()
+
+    const concatenatedCategoryPostsQueryKey = `${String(category).toUpperCase()}${CATEGORY_POSTS}`
+
+    const { data: postsData, refetch: refetchPostsData, isFetching: isPostsDataFetching } = useCategoryPosts(concatenatedCategoryPostsQueryKey, category, 2, { enabled: false })
+
+    const { mutate: mutateSortPosts } = useMutation({
+        mutationKey: [concatenatedCategoryPostsQueryKey],
+        mutationFn(sortBy) {
+            return sortPosts(postsData?.posts ?? [], sortBy)
+        },
+        onSuccess() {
+            console.log('Success!')
+            queryClient.invalidateQueries([concatenatedCategoryPostsQueryKey])
+        }
+    })
+
+    useEffect(() => {
+        console.log(postsData)
+    }, [postsData])
+
     const [selectedValue, setSelectedValue] = useState('trending')
-
-    const [postsData, setPostsData] = useState([])
-
-    const [lastDoc, setLastDoc] = useState()
-
-    const [totalPostsCount, setTotalPostsCount] = useState(0)
-
-    const [fetching, setFetching] = useState(true)
 
     let categoryData = {}
 
@@ -57,27 +73,8 @@ const Category = ({ category }) => {
     }
 
     useEffect(() => {
-        setPostsData([])
-        setLastDoc()
-        setFetching(true)
+        refetchPostsData()
     }, [category])
-
-    useEffect(() => {
-        if (fetching) {
-            setLastDoc()
-            DataSource.getCategoryPosts(categoryData.keyword, lastDoc, 10)
-                .then(({ posts, lastDoc, size }) => {
-                    setPostsData([...postsData, ...posts])
-                    setLastDoc(lastDoc)
-                    setTotalPostsCount(size)
-                })
-                .catch(error => console.log(error.message))
-                .finally(() => {
-                    setSelectedValue('trending')
-                    setFetching(false)
-                })
-        }
-    }, [category, fetching])
 
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
@@ -88,14 +85,14 @@ const Category = ({ category }) => {
 
     const scrollHandler = e => {
         if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100
-            && postsData.length < totalPostsCount) {
-            setFetching(true)
+            && postsData?.posts?.length < postsData?.totalPostsCount) {
+            refetchPostsData()
         }
     }
 
     useEffect(() => {
-        setPostsData(sortPosts(postsData, selectedValue))
-    }, [selectedValue])
+        mutateSortPosts(selectedValue)
+    }, [selectedValue, postsData])
 
     const selectConfig = {
         options: [
@@ -115,14 +112,14 @@ const Category = ({ category }) => {
             </div>
             <ContentConfig selectConfig={selectConfig} />
             <ul className={`${styles['category__posts']}`}>
-                {postsData?.length > 0 && (
-                    postsData?.map(post => (
+                {postsData?.posts?.length > 0 && (
+                    postsData.posts.map(post => (
                         <li key={post.id}>
                             <PostPreviewSmall {...post} />
                         </li>
                     ))
                 )}
-                <Loader isLoading={fetching} />
+                <Loader isLoading={isPostsDataFetching} />
             </ul>
         </div>
     )
