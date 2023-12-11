@@ -81,7 +81,7 @@ export default class DataSource {
                         user.userImageSrc = userImageDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${id}/userImage.${user.userImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${id}/userImage.webp`)
                         user.userImageSrc = customImage
                         break
                     default:
@@ -93,7 +93,7 @@ export default class DataSource {
                         user.coverImageSrc = userCoverDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${id}/userCover.${user.coverImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${id}/userCover.webp`)
                         user.coverImageSrc = customImage
                         break
                     default:
@@ -128,7 +128,7 @@ export default class DataSource {
                         user.userImageSrc = userImageDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.${user.userImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.webp`)
                         user.userImageSrc = customImage
                         break
                     default:
@@ -139,7 +139,7 @@ export default class DataSource {
                         user.coverImageSrc = userCoverDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.${user.coverImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.webp`)
                         user.coverImageSrc = customImage
                         break
                     default:
@@ -186,7 +186,7 @@ export default class DataSource {
                         user.userImageSrc = userImageDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.${user.userImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.webp`)
                         user.userImageSrc = customImage
                         break
                     default:
@@ -197,7 +197,7 @@ export default class DataSource {
                         user.coverImageSrc = userCoverDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.${user.coverImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.webp`)
                         user.coverImageSrc = customImage
                         break
                     default:
@@ -345,7 +345,7 @@ export default class DataSource {
                 post.imageSrc = postPreviewDefault
                 break
             case 'custom':
-                const customImage = await YandexDrive.downloadFile(`/kaivo/posts/${post?.id}/postImage.${post?.imageExtension}`)
+                const customImage = await YandexDrive.downloadFile(`/kaivo/posts/${post?.id}/postImage.webp`)
                 post.imageSrc = customImage
                 break
             default:
@@ -447,7 +447,7 @@ export default class DataSource {
                         user.userImageSrc = userImageDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.${user.userImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userImage.webp`)
                         user.userImageSrc = customImage
                         break
                     default:
@@ -458,7 +458,7 @@ export default class DataSource {
                         user.coverImageSrc = userCoverDefault
                         break
                     case 'custom':
-                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.${user.coverImageExtension}`)
+                        const customImage = await YandexDrive.downloadFile(`/kaivo/users/${user.id}/userCover.webp`)
                         user.coverImageSrc = customImage
                         break
                     default:

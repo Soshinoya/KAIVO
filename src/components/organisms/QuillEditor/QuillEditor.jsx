@@ -15,8 +15,6 @@ const QuillEditor = ({ rendernPropOnSubmit }) => {
 
   const onClickHandler = e => {
     e.preventDefault()
-    let isValid = true
-
     if (quillRef.current) {
       const quill = quillRef.current.getEditor()
       const htmlString = quill.root.innerHTML
@@ -29,32 +27,57 @@ const QuillEditor = ({ rendernPropOnSubmit }) => {
 
         if (src && src.startsWith('data:image/')) {
           const [, type, data] = src.match(/^data:image\/([a-z]+);base64,([\s\S]+)/i)
-          const fileExtension = type === 'jpeg' ? 'jpg' : type
           const binaryData = atob(data)
           const dataArray = new Uint8Array(binaryData.length)
           for (let i = 0; i < binaryData.length; i++) {
             dataArray[i] = binaryData.charCodeAt(i)
           }
-          const blob = new Blob([dataArray], { type: `image/${fileExtension}` })
-          const file = new File([blob], `image.${fileExtension}`, { type: `image/${fileExtension}` })
+          const blob = new Blob([dataArray], { type: `image/${type}` })
+          const file = new File([blob], `image.${type}`, { type: `image/${type}` })
 
-          imgTag.setAttribute('src', `${index}.${fileExtension}`)
+          imgTag.setAttribute('src', `${index}.${type}`)
           imageFiles.push({ file, index })
         }
 
         return imgTag
       })
+      rendernPropOnSubmit(html, imageFiles)
+    }
+  }
 
-      imageFiles.forEach(({ file }) => {
-        if (file?.size > 10 * 1024 * 1024) {
-          // Сюда добавить уведомление при ошибке
-          console.log('The selected files is too large. The maximum size is 10 MB.')
-          isValid = false
+  const onChangeHandler = e => {
+    if (quillRef.current) {
+      const quill = quillRef.current.getEditor()
+      const htmlString = quill.root.innerHTML
+      const html = textToHTML(htmlString)
+      const imgTags = html.querySelectorAll('img')
+
+      imgTags.forEach(imgTag => {
+        const src = imgTag.getAttribute('src')
+
+        if (src && src.startsWith('data:image/')) {
+          const [, type, data] = src.match(/^data:image\/([a-z]+);base64,([\s\S]+)/i)
+          const binaryData = atob(data)
+          const dataArray = new Uint8Array(binaryData.length)
+          for (let i = 0; i < binaryData.length; i++) {
+            dataArray[i] = binaryData.charCodeAt(i)
+          }
+          const blob = new Blob([dataArray], { type: `image/${type}` })
+          const file = new File([blob], `image.${type}`, { type: `image/${type}` })
+          if (type !== 'webp') {
+            // Сюда добавить уведомление при ошибке
+            console.error(`The .${type} extension is not supported, Available extensions: .webp`)
+            document.querySelector(`img[src='${src}']`)?.remove()
+          }
+          if (file?.size > 10 * 1024 * 1024) {
+            // Сюда добавить уведомление при ошибке
+            console.error('The selected files is too large. The maximum size is 10 MB.')
+            document.querySelector(`img[src='${src}']`)?.remove()
+          }
         }
       })
-
-      isValid && rendernPropOnSubmit(html, imageFiles)
     }
+    setValue(e)
   }
 
   const modules = {
@@ -81,7 +104,7 @@ const QuillEditor = ({ rendernPropOnSubmit }) => {
         modules={modules}
         formats={formats}
         value={value}
-        onChange={setValue}
+        onChange={onChangeHandler}
       />
       <div className='custom-editor__actions'>
         <Button type='submit' size='lg' text='Next to the settings' onClick={onClickHandler} />

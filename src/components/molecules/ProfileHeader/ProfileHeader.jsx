@@ -36,9 +36,9 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
 
         const imageExtension = image?.name.split('.').pop().toLowerCase()
 
-        if (imageExtension !== 'jpg' && imageExtension !== 'png' && imageExtension !== 'webp') {
+        if (imageExtension !== 'webp') {
             // Сюда добавить уведомление при ошибке
-            console.log(`The .${imageExtension} extension is not supported`)
+            console.log(`The .${imageExtension} extension is not supported, Available extensions: .webp`)
             return
         }
 
@@ -51,10 +51,9 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
         switch (imageType) {
             case 'cover':
                 setIsLoading(true)
-                YandexDrive.uploadFile(image, `/kaivo/users/${userId}/userCover.${imageExtension}`)
+                YandexDrive.uploadFile(image, `/kaivo/users/${userId}/userCover.webp`)
                     .then(async () => {
                         await AccountActions.updateAccountProperties(userId, {
-                            coverImageExtension: imageExtension,
                             coverImageSrc: 'custom'
                         })
                         navigate('/')
@@ -63,10 +62,9 @@ const ProfileHeader = ({ userId, nickname, status, profileImageSrc, profileImage
                 break;
             case 'avatar':
                 setIsLoading(true)
-                YandexDrive.uploadFile(image, `/kaivo/users/${userId}/userImage.${imageExtension}`)
+                YandexDrive.uploadFile(image, `/kaivo/users/${userId}/userImage.webp`)
                     .then(async () => {
                         await AccountActions.updateAccountProperties(userId, {
-                            userImageExtension: imageExtension,
                             userImageSrc: 'custom'
                         })
                         navigate('/')

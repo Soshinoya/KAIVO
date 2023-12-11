@@ -2,9 +2,7 @@ export const userInitialData = {
     id: '',
     nickname: '',
     userImageSrc: 'default',
-    userImageExtension: '',
     coverImageSrc: 'default',
-    coverImageExtension: '',
     secondaryText: 'secondary text',
     status: 'status',
     accountInfo: {

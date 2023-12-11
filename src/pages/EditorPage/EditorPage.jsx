@@ -101,9 +101,9 @@ const EditorPage = () => {
 
             const previewImageExtension = previewImage?.name.split('.').pop().toLowerCase()
 
-            if (isGotImage && previewImageExtension !== 'jpg' && previewImageExtension !== 'png' && previewImageExtension !== 'webp') {
+            if (isGotImage && previewImageExtension !== 'webp') {
                 // Сюда добавить уведомление при ошибке
-                console.log(`The .${previewImageExtension} extension is not supported`)
+                console.log(`The .${previewImageExtension} extension is not supported, Available extensions: .webp`)
                 return
             }
 
@@ -124,7 +124,6 @@ const EditorPage = () => {
                 description: formRef.current.querySelector('[name=description]')?.value,
                 content: articleString,
                 imageSrc: previewType,
-                imageExtension: previewType === 'custom' ? previewImageExtension : '',
                 date: {
                     type: 'date',
                     value: Date.now()
