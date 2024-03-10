@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
 
 import styles from './BurgerMenu.module.scss'
 
-import { blurBackground } from '../../../utils/blurBackground'
+import { USER } from '../../../service/queryKeys'
 
-import { Crypto } from '../../../context/CryptoContext'
+import { blurBackground } from '../../../utils/blurBackground'
 
 import CustomLink from '../../atoms/Link'
 import TopProfileLink from '../TopProfileLink/TopProfileLink'
@@ -13,7 +14,9 @@ import Button from '../../atoms/Button'
 
 const BurgerMenu = ({ links }) => {
 
-    const { user } = useContext(Crypto)
+    const queryClient = useQueryClient()
+
+    const user = queryClient.getQueryData([USER])
 
     const burgerMenuRef = useRef(null)
 

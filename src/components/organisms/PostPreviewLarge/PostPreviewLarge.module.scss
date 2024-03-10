@@ -46,6 +46,10 @@ div .post-preview-large {
     &__content {
         overflow: hidden;
         margin-bottom: 10px;
+
+        h1 {
+            text-align: left;
+        }
     }
 
     span {
