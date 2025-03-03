@@ -41,7 +41,8 @@ export default class YandexDrive {
     static _getOAuthToken = async () => {
         // ПОЛУЧЕНИЕ ОТЛАДОЧНОГО ТОКЕНА
         try {
-            return 'y0_AgAAAABkQX6fAAqEDwAAAADtCKX6uZ5MXVH0RwKeQFAFsoyHGy5Pnzw'
+            // return 'y0_AgAAAABkQX6fAAqEDwAAAADtCKX6uZ5MXVH0RwKeQFAFsoyHGy5Pnzw'
+            return 'y0__xCf_YWiBhiPiCoguaLPtxKbF6VYiP_TF6rYRSCJSATFzfxcyA'
         } catch (error) {
             console.log(defineError(error.error || error.message))
         }
